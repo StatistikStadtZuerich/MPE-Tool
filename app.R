@@ -39,15 +39,43 @@ ui <- fluidPage(
                         choices = unique(df$RaumeinheitLang),
                         selected = "Ganze Stadt"),
             
-            # Example radioButtons() vertical
-            tags$div(
-                class = "radioDiv",
-                radioButtons(inputId = "ButtonGroupLabel",
-                             label = "Typ der Wohnung:",
-                             choices = unique(data$GemeinnuetzigLang),
-                             selected = "Nicht gemeinnützig" # default value
+            conditionalPanel(
+                condition = 'input.select != "Quartiere"',
+            
+                # Example radioButtons() vertical
+                tags$div(
+                    class = "radioDiv",
+                    radioButtons(inputId = "ButtonGroupLabel",
+                                 label = "Typ der Wohnung:",
+                                 choices = unique(data$GemeinnuetzigLang),
+                                 selected = "Nicht gemeinnützig" # default value
+                    )
                 )
             ),
+            # conditionalPanel(
+            #     condition = 'input.select == "Stadtkreise"',
+            #     
+            #     # Example radioButtons() vertical
+            #     tags$div(
+            #         class = "radioDiv",
+            #         radioButtons(inputId = "ButtonGroupLabel",
+            #                      label = "Typ der Wohnung:",
+            #                      choices = unique(data$GemeinnuetzigLang),
+            #                      selected = "Nicht gemeinnützig" # default value
+            #         )
+            #     ),
+            # conditionalPanel(
+            #     condition = 'input.select == "Quartier"',
+            #     
+            #     # Example radioButtons() vertical
+            #     tags$div(
+            #         class = "radioDiv",
+            #         radioButtons(inputId = "ButtonGroupLabel",
+            #                      label = "Typ der Wohnung:",
+            #                      choices = unique(data$GemeinnuetzigLang),
+            #                      selected = "Nicht gemeinnützig" # default value
+            #         )
+            #     ),
             
             # Example radioButtons() 2
             tags$div(
@@ -125,9 +153,7 @@ ui <- fluidPage(
             hr(),
         
             # Example Table Output 
-            reactableOutput("table"),
-            
-            reactableOutput("table2")
+            reactableOutput("table")
            
         )
     )
@@ -159,38 +185,7 @@ server <- function(input, output) {
     })
     
     
-    # Reactable Output
     output$table <- renderReactable({
-        tableOutput <- reactable(filteredData() %>% 
-                                     select(GliederungLang, mean, qu50, ci),
-                                 paginationType = "simple",
-                                 language = reactableLang(
-                                     noData = "Keine Einträge gefunden",
-                                     pageNumbers = "{page} von {pages}",
-                                     pageInfo = "{rowStart} bis {rowEnd} von {rows} Einträgen",
-                                     pagePrevious = "\u276e",
-                                     pageNext = "\u276f",
-                                     pagePreviousLabel = "Vorherige Seite",
-                                     pageNextLabel = "Nächste Seite"
-                                 ),
-                                 defaultColDef = colDef(
-                                     align = "left",
-                                     minWidth = 50
-                                 ),
-                                 theme = reactableTheme(
-                                     borderColor = "#DEDEDE"
-                                 ),
-                                 outlined = TRUE,
-                                 highlight = FALSE,
-                                 defaultPageSize = 10,
-                                 onClick = "select",
-                                 selection = "single",
-                                 rowClass = JS("function(rowInfo) {return rowInfo.selected ? 'selected' : ''}"),
-                                 rowStyle = JS("function(rowInfo) {if (rowInfo.selected) { return { backgroundColor: '#F2F2F2'}}}")
-        )
-    })
-    
-    output$table2 <- renderReactable({
         
         # Prepare dfs
         data_mietobjekt <- filteredData() %>% 

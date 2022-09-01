@@ -33,3 +33,5 @@ data <- df %>%
     PreisartLang == "Netto" ~ "Nettomiete"
   )) %>% 
   mutate(ci = paste(qu50l, qu50u, sep = " bis "))
+
+
