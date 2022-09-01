@@ -34,37 +34,63 @@ ui <- fluidPage(
     sidebarLayout(
         sidebarPanel(
             
-            # Example textInput()
-            textInput("suchfeld", "Name:"),
-            
-            # Example dateRangeInput()
-            dateRangeInput("DateRange", "Datum:",
-                           start  =  min(data$date), # default start date
-                           end    =  max(data$date), # default end date
-                           min    =  min(data$date), # minimum allowed date
-                           max    =  max(data$date), # maximum allowed date
-                           format = "dd.mm.yyyy",
-                           language = "de",
-                           separator = icon("calendar")),
-            
             # Example selectInput()
-            selectInput("select", "Destination:", 
-                        choices = unique(data$dest),
-                        selected = "LAX"),
+            selectInput("select", "Geografischer Raum:", 
+                        choices = unique(df$RaumeinheitLang),
+                        selected = "Ganze Stadt"),
             
             # Example radioButtons() vertical
             tags$div(
                 class = "radioDiv",
                 radioButtons(inputId = "ButtonGroupLabel",
-                             label = "Flughafen:",
-                             choices = unique(data$origin),
-                             selected = "JFK" # default value
+                             label = "Typ der Wohnung:",
+                             choices = unique(data$GemeinnuetzigLang),
+                             selected = "Nicht gemeinnützig" # default value
                 )
             ),
             
-            # Example actionButton()
-            actionButton(inputId = "ActionButtonId",
-                         label = "Abfrage starten"),
+            # Example radioButtons() 2
+            tags$div(
+                class = "radioDiv",
+                radioButtons(inputId = "ButtonGroupLabel2",
+                             label = "Anzahl Zimmer:",
+                             choices = unique(data$ZimmerLang),
+                             selected = "3 Zimmer" # default value
+                )
+            ),
+            
+            # Example radioButtons() 2
+            tags$div(
+                class = "radioDiv",
+                radioButtons(inputId = "ButtonGroupLabel3",
+                             label = "Ebene Mietpreis:",
+                             choices = unique(data$EinheitLang),
+                             selected = "Mietpreis pro Quadratmeter" # default value
+                )
+            ),
+            
+            # Example radioButtons() 2
+            tags$div(
+                class = "radioDiv",
+                radioButtons(inputId = "ButtonGroupLabel4",
+                             label = "Anzahl Zimmer:",
+                             choices = unique(data$PreisartLang),
+                             selected = "Nettomiete" # default value
+                )
+            ),
+            
+            # Action Button (disappears after first click)
+            conditionalPanel(
+                condition = 'input.ActionButtonId==0',
+                
+                actionButton("ActionButtonId",
+                             "Abfrage starten")
+            ),
+            conditionalPanel(
+                condition = 'input.ActionButtonId>0',
+                
+            ),
+            
             
             # Example Download Button
             h3("Daten herunterladen"),
@@ -91,22 +117,17 @@ ui <- fluidPage(
         # Mail Panel: Outputs are placed here
         mainPanel(
             
-            # Example Title h1
-            h1("Titel der Tabelle"),
+            # Define subtitle
+            tags$div(
+                class = "infoDiv",
+                p("Die untenstehenden Mietobjekte entsprechen Ihren Suchkriterien. Für Detailinformationen wählen Sie eine Art der Mietobjekte aus.")
+            ),
             hr(),
-            
+        
             # Example Table Output 
             reactableOutput("table"),
             
-            # Example Title h2
-            h2("Untertitel des Outputs"),
-            
-            # Example Title h3
-            h3("Unter-Untertitel des Outputs"),
-            
-            # Example Text Paragraph
-            p("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."),
-            
+           
         )
     )
 )
@@ -115,36 +136,32 @@ ui <- fluidPage(
 # Server function
 server <- function(input, output) {
     
+    # First button click to activate search, after not necessary anymore
+    global <- reactiveValues(activeButton = FALSE)
+    
+    observeEvent(input$ActionButtonId, {
+        req(input$ActionButtonId)
+        global$activeButton <- TRUE
+    })
     
     # Filter data according to inputs
     filteredData <- reactive({
+        req(global$activeButton == TRUE)
         
-        # Filter: No Search
-        if(input$suchfeld == "") {
-            filtered <- data %>%
-                dplyr::filter(date >= input$DateRange[1] & date <= input$DateRange[2]) %>% 
-                filter(dest == input$select) %>% 
-                filter(origin == input$ButtonGroupLabel) 
-            
-            filtered
-            
-            # Filter: With Search   
-        } else {
-            filtered <- data %>%
-                filter(grepl(input$suchfeld, tailnum, ignore.case=TRUE)) %>%
-                dplyr::filter(date >= input$DateRange[1] & date <= input$DateRange[2]) %>% 
-                filter(dest == input$select) %>% 
-                filter(origin == input$ButtonGroupLabel)
-            
-            filtered
-            
-        }
+        filtered <- data %>%
+            filter(RaumeinheitLang == input$select) %>% 
+            filter(GemeinnuetzigLang == input$ButtonGroupLabel) %>% 
+            filter(ZimmerLang == input$ButtonGroupLabel2) %>% 
+            filter(EinheitLang == input$ButtonGroupLabel3) %>% 
+            filter(PreisartLang == input$ButtonGroupLabel4) 
+        filtered
     })
     
     
     # Reactable Output
     output$table <- renderReactable({
-        tableOutput <- reactable(filteredData(),
+        tableOutput <- reactable(filteredData() %>% 
+                                     select(GliederungLang, mean, qu50, ci),
                                  paginationType = "simple",
                                  language = reactableLang(
                                      noData = "Keine Einträge gefunden",
@@ -164,7 +181,7 @@ server <- function(input, output) {
                                  ),
                                  outlined = TRUE,
                                  highlight = FALSE,
-                                 defaultPageSize = 5,
+                                 defaultPageSize = 10,
                                  onClick = "select",
                                  selection = "single",
                                  rowClass = JS("function(rowInfo) {return rowInfo.selected ? 'selected' : ''}"),

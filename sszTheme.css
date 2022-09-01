@@ -157,6 +157,33 @@ a:hover {
   letter-spacing: 0.01em;
   text-align: left;
 }
+#ButtonGroupLabel2-label {
+  font-family: HelveticaNeueLTW01_55Roman;
+  color: #646464;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 19px;
+  letter-spacing: 0.01em;
+  text-align: left;
+}
+#ButtonGroupLabel3-label {
+  font-family: HelveticaNeueLTW01_55Roman;
+  color: #646464;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 19px;
+  letter-spacing: 0.01em;
+  text-align: left;
+}
+#ButtonGroupLabel4-label {
+  font-family: HelveticaNeueLTW01_55Roman;
+  color: #646464;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 19px;
+  letter-spacing: 0.01em;
+  text-align: left;
+}
 
 /* Control Label (Text Input) */
 #suchfeld-label.control-label {
