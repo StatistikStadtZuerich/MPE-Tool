@@ -127,6 +127,7 @@ ui <- fluidPage(
             # Example Table Output 
             reactableOutput("table"),
             
+            reactableOutput("table2")
            
         )
     )
@@ -187,6 +188,104 @@ server <- function(input, output) {
                                  rowClass = JS("function(rowInfo) {return rowInfo.selected ? 'selected' : ''}"),
                                  rowStyle = JS("function(rowInfo) {if (rowInfo.selected) { return { backgroundColor: '#F2F2F2'}}}")
         )
+    })
+    
+    output$table2 <- renderReactable({
+        
+        # Prepare dfs
+        data_mietobjekt <- filteredData() %>% 
+                 select(GliederungLang, mean, qu50, ci)
+
+        data_detail <-filteredData() %>%
+            select(GliederungLang, qu10, qu25, qu50, qu75, qu90) %>%
+            pivot_longer(!GliederungLang) %>%
+            mutate(Test1 = " ",
+                   Test2 = " ")
+        
+        tableOutput2 <- reactable(data_mietobjekt,
+                                  paginationType = "simple",
+                                  language = reactableLang(
+                                      noData = "Keine Einträge gefunden",
+                                      pageNumbers = "{page} von {pages}",
+                                      pageInfo = "{rowStart} bis {rowEnd} von {rows} Einträgen",
+                                      pagePrevious = "\u276e",
+                                      pageNext = "\u276f",
+                                      pagePreviousLabel = "Vorherige Seite",
+                                      pageNextLabel = "Nächste Seite"
+                                  ),
+                                  theme = reactableTheme(
+                                      borderColor = "#DEDEDE"
+                                  ),
+                                  outlined = TRUE,
+                                  highlight = TRUE,
+                                  # columns = list(
+                                  #     Gebiet =  colDef(minWidth = 30,
+                                  #                      style = list(
+                                  #                          fontFamily = "HelveticaNeueLTW05_85Heavy")
+                                  #     ),
+                                  #     `Stimmbeteiligung (in %)` = colDef(minWidth = 30,
+                                  #                                        align = "right"),
+                                  #     `Ja-Anteil (in %)` = colDef(
+                                  #         minWidth = 50,
+                                  #         name = "Abstimmungsergebnis (in %)",
+                                  #         align = "center",
+                                  #         cell = function(value) {
+                                  #             width <- paste0(value, "%")
+                                  #             bar_chart(value, width = width, fill = "#6995C3", background = "#D68692")
+                                  #         }),
+                                  #     `Nein-Anteil (in %)` = colDef(
+                                  #         minWidth = 15,
+                                  #         name = "",
+                                  #         align = "left")
+                                  # ),
+                                  details = function(index) {
+                                      det <- filter(data_detail, GliederungLang == data_detail$GliederungLang[index]) %>% select(-GliederungLang)
+                                      htmltools::div(
+                                          class = "Details",
+                                          reactable(det, 
+                                                    class = "innerTable",
+                                                    outlined = TRUE,
+                                                    fullWidth = TRUE,
+                                                    borderless = TRUE,
+                                                    theme = reactableTheme(
+                                                        borderColor = "#DEDEDE"
+                                                    ),
+                                                    columns = list(
+                                                        name = colDef(
+                                                            name = " ",
+                                                            minWidth = 30
+                                                        ),
+                                                        value = colDef(
+                                                            name = " ",
+                                                            minWidth = 30,
+                                                            align = "right",
+                                                            cell = function(value) {
+                                                                if (is.numeric(value)) {
+                                                                    format(value, big.mark = " ")
+                                                                } else
+                                                                {
+                                                                    return(value)
+                                                                }
+                                                            }
+                                                        ),
+                                                        Test1 = colDef(
+                                                            minWidth = 50,
+                                                            name = " ",
+                                                            align = "center",
+                                                        ),
+                                                        Test2 = colDef(
+                                                            minWidth = 15,
+                                                            name = " ",
+                                                            align = "center",
+                                                        )
+                                                    )
+                                          )
+                                      )
+                                  },
+                                  onClick = "expand",
+                                  defaultPageSize = 13
+        )
+        tableOutput2
     })
     
     
