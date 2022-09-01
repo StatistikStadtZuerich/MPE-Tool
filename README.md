@@ -15,7 +15,7 @@ flowchart LR;
   output1 --> results1[[Resultat Vorlagen]]:::result
   results1 --> f6[F6 select level]:::filter
   f6 --> output2[(output1 + F6)]:::data
-  output2 --> results2[["Resultat Vorlagen \n(voteResult)"]]:::result
+  output2 --> results2[["Resultat Level \n(show percentiles \nand confidence interval)"]]:::result
   output2 --> downloads{Downloads}:::download
   
   classDef filter fill:#ffff2f,stroke:#ffff2f;
