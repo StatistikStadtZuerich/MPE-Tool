@@ -7,7 +7,7 @@ Shiny app for MPE Tool
 ```mermaid
 flowchart LR;
   f1[F1 select area]:::filter --> button[button start]:::button
-  f2[F2 select typ of apartment]:::filter --> button
+  f2[F2 select type of apartment]:::filter --> button
   f3[F3 select number of rooms]:::filter --> button
   f4[F4 select level of rental price]:::filter --> button
   f5[F5 select net or gros price]:::filter --> button
