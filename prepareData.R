@@ -41,3 +41,4 @@ data <- df %>%
   mutate(ci75 = paste(qu75l, qu75u, sep = " bis ")) %>% 
   mutate(ci90 = paste(qu90l, qu90u, sep = " bis ")) 
   
+
