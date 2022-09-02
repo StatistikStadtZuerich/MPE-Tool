@@ -12,10 +12,10 @@ flowchart LR;
   f4[F4 select level of rental price]:::filter --> button
   f5[F5 select net or gros price]:::filter --> button
   button --> output1[(filtered data = \nF1 + F2 + F3 + F4 + F5)]:::data
-  output1 --> results1[[Resultat Vorlagen]]:::result
+  output1 --> results1[[Resultat rent prices]]:::result
   results1 --> f6[F6 select level]:::filter
   f6 --> output2[(output1 + F6)]:::data
-  output2 --> results2[["Resultat Level \n(show percentiles \nand confidence interval)"]]:::result
+  output2 --> results2[["Resultat Level \n(show percentiles \nand confidence \ninterval)"]]:::result
   output2 --> downloads{Downloads}:::download
   
   classDef filter fill:#ffff2f,stroke:#ffff2f;
