@@ -15,11 +15,6 @@ source("prepareData.R", local = TRUE)
 # Set the Icon path
 icon <- icon_set("icons/")
 
-# Example Data
-data <- flights %>% 
-    mutate(date = ymd(paste(year, month, day, sep = "-"))) %>%
-    select(tailnum, date, dest, origin, distance) %>% 
-    sample_n(300)
 
 # Define UI
 ui <- fluidPage(
@@ -52,30 +47,6 @@ ui <- fluidPage(
                     )
                 )
             ),
-            # conditionalPanel(
-            #     condition = 'input.select == "Stadtkreise"',
-            #     
-            #     # Example radioButtons() vertical
-            #     tags$div(
-            #         class = "radioDiv",
-            #         radioButtons(inputId = "ButtonGroupLabel",
-            #                      label = "Typ der Wohnung:",
-            #                      choices = unique(data$GemeinnuetzigLang),
-            #                      selected = "Nicht gemeinnützig" # default value
-            #         )
-            #     ),
-            # conditionalPanel(
-            #     condition = 'input.select == "Quartier"',
-            #     
-            #     # Example radioButtons() vertical
-            #     tags$div(
-            #         class = "radioDiv",
-            #         radioButtons(inputId = "ButtonGroupLabel",
-            #                      label = "Typ der Wohnung:",
-            #                      choices = unique(data$GemeinnuetzigLang),
-            #                      selected = "Nicht gemeinnützig" # default value
-            #         )
-            #     ),
             
             # Example radioButtons() 2
             tags$div(
@@ -148,7 +119,7 @@ ui <- fluidPage(
             # Define subtitle
             tags$div(
                 class = "infoDiv",
-                p("Die untenstehenden Mietobjekte entsprechen Ihren Suchkriterien. Für Detailinformationen wählen Sie eine Art der Mietobjekte aus.")
+                p("Die untenstehenden Mietobjekte entsprechen Ihren Suchkriterien. Für Detailinformationen wählen Sie eine Zeile aus.")
             ),
             hr(),
         
@@ -187,15 +158,41 @@ server <- function(input, output) {
     
     output$table <- renderReactable({
         
+        # Render a bar chart with a label on the left
+        bar_chart <- function(label, width = "100%", height = "2rem", fill = "#00bfc4", background = NULL) {
+            bar <- div(style = list(background = fill, width = width, height = height))
+            chart <- div(style = list(flexGrow = 1, marginLeft = "1.5rem", background = background), bar)
+            div(style = list(display = "flex", alignItems = "center"), label, chart)
+        }
+        
+        
         # Prepare dfs
         data_mietobjekt <- filteredData() %>% 
-                 select(GliederungLang, mean, qu50, ci)
+                 select(GliederungLang, mean, qu50, ci50)
 
-        data_detail <-filteredData() %>%
-            select(GliederungLang, qu10, qu25, qu50, qu75, qu90) %>%
-            pivot_longer(!GliederungLang) %>%
-            mutate(Test1 = " ",
-                   Test2 = " ")
+        data_detail <- filteredData() %>% 
+            dplyr::select(GliederungLang, qu10, qu25, qu50, qu75, qu90, ci10, ci25, ci50, ci75, ci90) %>%
+            gather(key, value, -GliederungLang) %>% 
+            mutate(Art = case_when(
+                startsWith(key, "qu") ~ "Wert",
+                startsWith(key, "ci") ~ "Konfidenzintervall"
+            )) %>% 
+            mutate(Perzentil = case_when(
+                key == "qu10" ~ "10. Perzentil",
+                key == "qu25" ~ "25. Perzentil",
+                key == "qu50" ~ "50. Perzentil",
+                key == "qu75" ~ "75. Perzentil",
+                key == "qu10" ~ "90. Perzentil",
+                key == "qu90" ~ "90. Perzentil",
+                key == "ci10" ~ "10. Perzentil",
+                key == "ci25" ~ "25. Perzentil",
+                key == "ci50" ~ "50. Perzentil",
+                key == "ci75" ~ "75. Perzentil",
+                key == "ci90" ~ "90. Perzentil"
+            )) %>% 
+            select(-key) %>%
+            spread(Art, value) %>%
+            select(GliederungLang, Perzentil, Wert, Konfidenzintervall) 
         
         tableOutput2 <- reactable(data_mietobjekt,
                                   paginationType = "simple",
@@ -213,28 +210,22 @@ server <- function(input, output) {
                                   ),
                                   outlined = TRUE,
                                   highlight = TRUE,
-                                  # columns = list(
-                                  #     Gebiet =  colDef(minWidth = 30,
-                                  #                      style = list(
-                                  #                          fontFamily = "HelveticaNeueLTW05_85Heavy")
-                                  #     ),
-                                  #     `Stimmbeteiligung (in %)` = colDef(minWidth = 30,
-                                  #                                        align = "right"),
-                                  #     `Ja-Anteil (in %)` = colDef(
-                                  #         minWidth = 50,
-                                  #         name = "Abstimmungsergebnis (in %)",
-                                  #         align = "center",
-                                  #         cell = function(value) {
-                                  #             width <- paste0(value, "%")
-                                  #             bar_chart(value, width = width, fill = "#6995C3", background = "#D68692")
-                                  #         }),
-                                  #     `Nein-Anteil (in %)` = colDef(
-                                  #         minWidth = 15,
-                                  #         name = "",
-                                  #         align = "left")
-                                  # ),
+                                  columns = list(
+                                      GliederungLang = colDef(
+                                          name = "Gliederung"),
+                                      mean = colDef(name = "Durchschnitt (in CHF)",  
+                                                    align = "right"),
+                                      qu50 = colDef(
+                                          name = "Median (in CHF)",
+                                          cell = function(value) {
+                                              width <- paste0(value, "")
+                                              bar_chart(value, width = width, fill = "#6995C3", background = "#D68692")
+                                          }),
+                                      ci50 = colDef(
+                                          name = "Konfidenzintervall (in CHF)"
+                                      )),
                                   details = function(index) {
-                                      det <- filter(data_detail, GliederungLang == data_detail$GliederungLang[index]) %>% select(-GliederungLang)
+                                      det <- filter(data_detail, GliederungLang == data_mietobjekt$GliederungLang[index]) %>% select(-GliederungLang)
                                       htmltools::div(
                                           class = "Details",
                                           reactable(det, 
@@ -246,34 +237,15 @@ server <- function(input, output) {
                                                         borderColor = "#DEDEDE"
                                                     ),
                                                     columns = list(
-                                                        name = colDef(
-                                                            name = " ",
-                                                            minWidth = 30
+                                                        Wert = colDef(
+                                                            name = "Wert (in CHF)"
                                                         ),
-                                                        value = colDef(
-                                                            name = " ",
-                                                            minWidth = 30,
-                                                            align = "right",
-                                                            cell = function(value) {
-                                                                if (is.numeric(value)) {
-                                                                    format(value, big.mark = " ")
-                                                                } else
-                                                                {
-                                                                    return(value)
-                                                                }
-                                                            }
-                                                        ),
-                                                        Test1 = colDef(
-                                                            minWidth = 50,
-                                                            name = " ",
-                                                            align = "center",
-                                                        ),
-                                                        Test2 = colDef(
-                                                            minWidth = 15,
-                                                            name = " ",
-                                                            align = "center",
+                                                        Konfidenzintervall = colDef(
+                                                            name = "Konfidenzintervall (in CHF)"
                                                         )
+                                                        
                                                     )
+                                                    
                                           )
                                       )
                                   },
@@ -308,3 +280,4 @@ server <- function(input, output) {
 
 # Run the application 
 shinyApp(ui = ui, server = server)
+

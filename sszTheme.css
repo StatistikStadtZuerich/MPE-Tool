@@ -529,6 +529,13 @@ button:active {
   display: none;
 }
 
+/* Second Detail Table */
+.Details {
+  padding-left: 45px;
+  border-top: 1px solid #DEDEDE;
+}
+
+
 
  /*******************************
  * Date Range
