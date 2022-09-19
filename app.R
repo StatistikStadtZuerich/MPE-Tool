@@ -76,7 +76,7 @@ ui <- fluidPage(
                 )
             ),
             
-            # Example radioButtons() 2
+            # Example radioButtons() 3
             tags$div(
                 class = "radioDiv",
                 radioButtons(inputId = "ButtonGroupLabel3",
@@ -86,7 +86,7 @@ ui <- fluidPage(
                 )
             ),
             
-            # Example radioButtons() 2
+            # Example radioButtons() 4
             tags$div(
                 class = "radioDiv",
                 radioButtons(inputId = "ButtonGroupLabel4",
@@ -282,7 +282,7 @@ server <- function(input, output) {
                                       )
                                   },
                                   onClick = "expand",
-                                  defaultPageSize = 13
+                                  defaultPageSize = 15
         )
         tableOutput2
     })
