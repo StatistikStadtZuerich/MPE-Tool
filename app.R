@@ -23,7 +23,7 @@ ui <- fluidPage(
     includeCSS("sszTheme.css"),
     
     # Application Title 
-    titlePanel("MPE App"),
+    #titlePanel("MPE App"),
     
     # Sidebar: Input widgets are placed here
     sidebarLayout(
@@ -42,11 +42,29 @@ ui <- fluidPage(
                     class = "radioDiv",
                     radioButtons(inputId = "ButtonGroupLabel",
                                  label = "Typ der Wohnung:",
-                                 choices = unique(data$GemeinnuetzigLang),
-                                 selected = "Nicht gemeinnützig" # default value
+                                 choices = c("Alle Wohnungen",
+                                             "Gemeinnützig",
+                                             "Nicht gemeinnützig"),
+                                 selected = "Alle Wohnungen" # default value
                     )
                 )
             ),
+            
+            conditionalPanel(
+                condition = 'input.select == "Quartiere"',
+                
+                # Example radioButtons() vertical
+                tags$div(
+                    class = "radioDiv",
+                    radioButtons(inputId = "ButtonGroupLabel",
+                                 label = "Typ der Wohnung:",
+                                 choices = c("Alle Wohnungen"),
+                                 selected = "Alle Wohnungen" # default value
+                    )
+                )
+            ),
+            
+            
             
             # Example radioButtons() 2
             tags$div(
@@ -116,12 +134,22 @@ ui <- fluidPage(
         # Mail Panel: Outputs are placed here
         mainPanel(
             
-            # Define subtitle
-            tags$div(
-                class = "infoDiv",
-                p("Die untenstehenden Mietobjekte entsprechen Ihren Suchkriterien. Für Detailinformationen wählen Sie eine Zeile aus.")
+            conditionalPanel(
+                condition = 'input.ActionButtonId>0',
+                
+                # Title for table
+                h1("Die untenstehenden Mietpreise entsprechen Ihren Suchkriterien"),
+                hr(),
+                # Define subtitle
+                tags$div(
+                    class = "infoDiv",
+                    p("Für Detailinformationen zur Verteilung der geschätzten Mietpreise wählen Sie eine Zeile aus. Alle Angaben in Schweizer Franken.")
+                )
             ),
-            hr(),
+            conditionalPanel(
+                condition = 'input.ActionButtonId==0',
+                
+            ),
         
             # Example Table Output 
             reactableOutput("table")
@@ -162,13 +190,14 @@ server <- function(input, output) {
         bar_chart <- function(label, width = "100%", height = "2rem", fill = "#00bfc4", background = NULL) {
             bar <- div(style = list(background = fill, width = width, height = height))
             chart <- div(style = list(flexGrow = 1, marginLeft = "1.5rem", background = background), bar)
-            div(style = list(display = "flex", alignItems = "center"), label, chart)
+            div(style = list(display = "flex"), label, chart)
         }
         
         
         # Prepare dfs
         data_mietobjekt <- filteredData() %>% 
-                 select(GliederungLang, mean, qu50, ci50)
+                 mutate(WertNum = as.numeric(qu50)) %>% 
+                 select(GliederungLang, mean, WertNum, ci50)
 
         data_detail <- filteredData() %>% 
             dplyr::select(GliederungLang, qu10, qu25, qu50, qu75, qu90, ci10, ci25, ci50, ci75, ci90) %>%
@@ -192,7 +221,7 @@ server <- function(input, output) {
             )) %>% 
             select(-key) %>%
             spread(Art, value) %>%
-            select(GliederungLang, Perzentil, Wert, Konfidenzintervall) 
+            select(GliederungLang, Perzentil, Wert, Konfidenzintervall)
         
         tableOutput2 <- reactable(data_mietobjekt,
                                   paginationType = "simple",
@@ -212,17 +241,20 @@ server <- function(input, output) {
                                   highlight = TRUE,
                                   columns = list(
                                       GliederungLang = colDef(
-                                          name = "Gliederung"),
-                                      mean = colDef(name = "Durchschnitt (in CHF)",  
-                                                    align = "right"),
-                                      qu50 = colDef(
-                                          name = "Median (in CHF)",
+                                          name = "Gliederung",
+                                          minWidth = 50),
+                                      mean = colDef(name = "Durchschnitt",  
+                                                    align = "right",
+                                                    minWidth = 50),
+                                      WertNum = colDef(
+                                          name = "Median",
+                                          align = "left",
                                           cell = function(value) {
-                                              width <- paste0(value, "")
-                                              bar_chart(value, width = width, fill = "#6995C3", background = "#D68692")
+                                              width <- paste0(value / max(data_mietobjekt$WertNum) * 100, "%")
+                                              bar_chart(value, width = width, fill = "#6995C3")
                                           }),
                                       ci50 = colDef(
-                                          name = "Konfidenzintervall (in CHF)"
+                                          name = "Konfidenzintervall"
                                       )),
                                   details = function(index) {
                                       det <- filter(data_detail, GliederungLang == data_mietobjekt$GliederungLang[index]) %>% select(-GliederungLang)
@@ -238,10 +270,10 @@ server <- function(input, output) {
                                                     ),
                                                     columns = list(
                                                         Wert = colDef(
-                                                            name = "Wert (in CHF)"
+                                                            name = "Wert"
                                                         ),
                                                         Konfidenzintervall = colDef(
-                                                            name = "Konfidenzintervall (in CHF)"
+                                                            name = "Konfidenzintervall"
                                                         )
                                                         
                                                     )

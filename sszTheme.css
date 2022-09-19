@@ -9,11 +9,11 @@
 
 /* Ruler */
 hr {
-  height: 1px;
+  height: 0.2px;
   background-color: #DEDEDE;
   border: none;
   margin-top: 16px;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 /* h1 */
@@ -247,6 +247,7 @@ a:hover {
 /* Radio Buttons Label */
 .radioDiv {
   margin-top: 18px;
+  margin-bottom: 40px;
 }
 
 #ButtonGroupLabel {
@@ -431,6 +432,10 @@ a:hover {
   color: white;
 }
 
+#ActionButtonId {
+  margin-top: -15px;
+}
+
 #ActionButtonId:active {
   outline-color: transparent;
   outline-style: solid;
@@ -516,6 +521,10 @@ button:active {
 .rt-page-button:disabled {
     opacity: 0;
     cursor: default;
+}
+
+.rt-td-inner {
+  background-color: yellow;
 }
 
 /* Activate Background-color and pointer on hover */
@@ -873,10 +882,20 @@ button:active {
     transition: 0.7s;
  }
  
+ 
+/*******************************
+* Info Div
+*******************************/
 
- /*******************************
- * SSZ Fonts
- *******************************/
+.infoDiv {
+  margin-bottom: 40px;
+}
+ 
+ 
+
+/*******************************
+* SSZ Fonts
+*******************************/
  
 @font-face {
   font-family: HelveticaNeueLTW01_41488878;

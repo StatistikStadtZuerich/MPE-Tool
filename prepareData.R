@@ -22,6 +22,25 @@ package.check <- lapply(
 df <- read.csv("O:/Publikationen/7_Webartikel/2022/WEB_010_2022_Mietpreiserhebung/3_Ergebnisse/OGD_Export.csv",
                sep = ";", encoding = "UTF-8" )
 
+# ##URL
+# URL <- c("https://gist.githubusercontent.com/DonGoginho/c5f003f5f27a52d15f3e149c99f88e58/raw/32fa3baca067cd262ca187ed5dc793b02944b852/BAU516OD5161.csv")
+# 
+# ##Download
+# dataDownload <- function(link) {
+#   data <- data.table::fread(link,
+#                             encoding = "UTF-8")
+# }
+# 
+# #Parallelisation
+# cl <- makeCluster(detectCores())
+# clusterExport(cl, "URL")
+# data <- parLapply(cl, URL, dataDownload)
+# stopCluster(cl)
+# 
+# 
+# ##Data
+# df <- data[[1]]
+
 # always have one decimal
 specify_decimal <- function(x, k) trimws(format(round(x, 1), nsmall=1))
 
