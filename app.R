@@ -31,7 +31,7 @@ ui <- fluidPage(
             
             # Example selectInput()
             selectInput("select", "Geografischer Raum:", 
-                        choices = unique(df$RaumeinheitLang),
+                        choices = unique(data$RaumeinheitLang),
                         selected = "Ganze Stadt"),
             
             conditionalPanel(
@@ -42,9 +42,7 @@ ui <- fluidPage(
                     class = "radioDiv",
                     radioButtons(inputId = "ButtonGroupLabel",
                                  label = "Typ der Wohnung:",
-                                 choices = c("Alle Wohnungen",
-                                             "Gemeinnützig",
-                                             "Nicht gemeinnützig"),
+                                 choices = unique(data$GemeinnuetzigLang),
                                  selected = "Alle Wohnungen" # default value
                     )
                 )
@@ -90,7 +88,7 @@ ui <- fluidPage(
             tags$div(
                 class = "radioDiv",
                 radioButtons(inputId = "ButtonGroupLabel4",
-                             label = "Anzahl Zimmer:",
+                             label = "Art der Miete:",
                              choices = unique(data$PreisartLang),
                              selected = "Nettomiete" # default value
                 )
@@ -187,17 +185,48 @@ server <- function(input, output) {
     output$table <- renderReactable({
         
         # Render a bar chart with a label on the left
-        bar_chart <- function(label, width = "100%", height = "2rem", fill = "#00bfc4", background = NULL) {
+        # bar_chart <- function(label, width = "100%", height = "2rem", fill = "#00bfc4", background = NULL) {
+        #     bar <- div(style = list(background = fill, width = width, height = height))
+        #     chart <- div(style = list(flexGrow = 1, marginLeft = "1.0rem", background = background), bar)
+        #     div(style = list(display = "flex"), label, chart)
+        # }
+        bar_chart <- function(width = "100%", height = "2rem", fill = "#00bfc4", background = NULL) {
             bar <- div(style = list(background = fill, width = width, height = height))
-            chart <- div(style = list(flexGrow = 1, marginLeft = "1.5rem", background = background), bar)
-            div(style = list(display = "flex"), label, chart)
+            chart <- div(style = list(flexGrow = 1, marginLeft = "1.0rem", background = background), bar)
+            div(style = list(display = "flex"), chart)
+        }
+        
+        
+        # bar_chart <- function(width = "100%", height = "2rem", fill = "#00bfc4", background = NULL) {
+        #     bar <- div(style = list(background = fill, width = width, height = height))
+        #     chart <- div(style = list(flexGrow = 1, marginLeft = "0.0rem", background = background), bar)
+        #     image = div(style = list(display = "flex"), chart)
+        #     
+        #     list(backgroundImage = image)
+        # }
+        
+        
+        bar_style <- function(width = 1, fill = "#e6e6e6", height = "2.8rem",
+                              color = NULL) {
+                position <- paste0(width * 100, "%")
+                image <- sprintf("linear-gradient(90deg, %1$s %2$s, transparent %2$s)", fill, position)
+            
+            list(
+                backgroundImage = image,
+                backgroundSize = paste("100%", height),
+                backgroundRepeat = "no-repeat",
+                backgroundPosition = "top - 3px",
+                color = color
+            )
         }
         
         
         # Prepare dfs
         data_mietobjekt <- filteredData() %>% 
-                 mutate(WertNum = as.numeric(qu50)) %>% 
-                 select(GliederungLang, mean, WertNum, ci50)
+                 mutate(WertNum2 = as.numeric(qu50)) %>%
+                 mutate(WertNum = qu50) %>% 
+                 # mutate(WertNum = qu50) %>%
+                 select(GliederungLang, WertNum, WertNum2, ci50) 
 
         data_detail <- filteredData() %>% 
             dplyr::select(GliederungLang, qu10, qu25, qu50, qu75, qu90, ci10, ci25, ci50, ci75, ci90) %>%
@@ -243,16 +272,23 @@ server <- function(input, output) {
                                       GliederungLang = colDef(
                                           name = "Gliederung",
                                           minWidth = 50),
-                                      mean = colDef(name = "Durchschnitt",  
-                                                    align = "right",
-                                                    minWidth = 50),
-                                      WertNum = colDef(
-                                          name = "Median",
+                                      WertNum = colDef(name = "Median",
+                                                        align = "right",
+                                                        minWidth = 50),
+                                      WertNum2 = colDef(
+                                          name = "",
                                           align = "left",
                                           cell = function(value) {
-                                              width <- paste0(value / max(data_mietobjekt$WertNum) * 100, "%")
-                                              bar_chart(value, width = width, fill = "#6995C3")
+                                              width <- paste0(value / max(data_mietobjekt$WertNum2) * 100, "%")
+                                              bar_chart(width = width, fill = "#6995C3")
                                           }),
+                                      # WertNum = colDef(
+                                      #     name = "Median",
+                                      #     style = function(value) {
+                                      #         bar_style(width = value / max(data_mietobjekt$WertNum), fill = "#6995C3", color = "#fff")
+                                      #     },
+                                      #     align = "left"
+                                      # ),
                                       ci50 = colDef(
                                           name = "Konfidenzintervall"
                                       )),
