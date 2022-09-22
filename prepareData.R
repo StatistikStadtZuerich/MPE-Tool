@@ -79,3 +79,4 @@ data <- dataQuadrmpreis %>%
          qu75, ci75, qu90, ci90, Domain, Sample1, Sample2)
   
 rm(df, data_prep, dataQuadrmpreis, dataWhgpreis)
+

@@ -329,6 +329,20 @@ server <- function(input, output) {
         tableOutput2
     })
     
+    filteredData_excel <- reactive({
+        
+        
+        filtered <- filteredData() %>%
+            rename(Raumeinheit = RaumeinheitLang,
+                   Gliederung = GliederungLang,
+                   Zimmer = ZimmerLang,
+                   Gemeinnützig = GemeinnuetzigLang,
+                   Einheit = EinheitLang,
+                   Preisart = PreisartLang) %>% 
+            select(-ends_with("Sort"))
+        filtered
+    })
+    
     
     # Render data download
     # CSV
@@ -337,7 +351,7 @@ server <- function(input, output) {
             paste("data-", Sys.Date(), ".csv", sep="")
         },
         content = function(file) {
-            write.csv(filteredData(), file)
+            write.csv(filteredData(), file, fileEncoding = "UTF-8")
         }
     )
     
@@ -347,7 +361,7 @@ server <- function(input, output) {
             paste("data-", Sys.Date(), ".xlsx", sep="")
         },
         content = function(file) {
-            sszDownloadExcel(preparedData, file, "Ganze Stadt", "Alle Whg", "3Zimmer", "Mietpreis pro Whg", "Nettomiete")
+            sszDownloadExcel(filteredData_excel(), file, input$select, input$ButtonGroupLabel, input$ButtonGroupLabel2, input$ButtonGroupLabel3, input$ButtonGroupLabel4)
         }
     )
 }
