@@ -12,6 +12,9 @@ source("sszDownload.R", local = TRUE)
 # Source Data Load
 source("prepareData.R", local = TRUE)
 
+# Source Export Excel
+source("prepareExcel/exportExcel.R", local = TRUE)
+
 # Set the Icon path
 icon <- icon_set("icons/")
 
@@ -344,7 +347,7 @@ server <- function(input, output) {
             paste("data-", Sys.Date(), ".xlsx", sep="")
         },
         content = function(file) {
-            write.xlsx(filteredData(), file)
+            sszDownloadExcel(preparedData, file, "Ganze Stadt", "Alle Whg", "3Zimmer", "Mietpreis pro Whg", "Nettomiete")
         }
     )
 }

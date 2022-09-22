@@ -1,4 +1,4 @@
-sszDownloadExcel <- function(filteredData, title){
+sszDownloadExcel <- function(filteredData, file, selctedArea, selctedWhg, selectedRoom, selectedLevel, selectedRent){
     
     # Required Libraries
     library(jpeg)
@@ -23,8 +23,12 @@ sszDownloadExcel <- function(filteredData, title){
     data <- data %>%
       mutate(
         Date = ifelse(is.na(Date), NA, paste0(format(Sys.Date(), "%d"), ".", format(Sys.Date(), "%m"), ".", format(Sys.Date(), "%Y"))),
-        Titel = ifelse(is.na(Titel), NA, paste0(title))
+        Titel = ifelse(is.na(Titel), NA, paste0("Mietpreise für Ihre Auswahl: ", selctedArea, ", ", selctedWhg, ", ", selectedRoom, ", ", selectedLevel, ", ", selectedRent ))
         )
+    
+    selected <- list(c("T_1", "Mietpreise für Ihre Auswahl:", paste0(selctedArea, ", ", selctedWhg, ", ", selectedRoom, ", ", selectedLevel, ", ", selectedRent ), "  ", "Quelle: Statistik Stadt Zürich, Mietpreiserhebung (MPE)")) %>% 
+      as.data.frame()
+      
     # Data Sheet 2
     bdf <- as.data.frame(logo)
     
@@ -59,31 +63,39 @@ sszDownloadExcel <- function(filteredData, title){
             withFilter = FALSE)
     
     # Write Table Sheet 3
+    writeData(wb, sheet = 3, x = selected,
+              colNames = FALSE, rowNames = FALSE,
+              startCol = 1,
+              startRow = 1,
+              withFilter = FALSE)
     writeData(wb, sheet = 3, x = filteredData,
             colNames = TRUE, rowNames = FALSE,
             startCol = 1,
-            startRow = 1,
+            startRow = 9,
             withFilter = FALSE)
     
     # Wrap Image into Plot
-    ggplot(bdf,aes(x,y))+geom_raster(aes(fill=value))+
-    theme_void() + 
+    p <-ggplot(bdf,aes(x,y))+geom_raster(aes(fill=value))+
+    theme_void() +
     theme(legend.position = "none") +
     scale_fill_gradient(low="black",high="white") +
     scale_y_continuous(expand=c(0,0),
                        trans=scales::reverse_trans()) +
     scale_x_continuous(expand=c(0,0))
-    
+
     # Insert Plot on Sheet 1
-    insertPlot(wb, sheet = 1, startRow= 2, startCol = 2, width = 1.75 , height = 0.3)  
-    dev.off()
+    print(p)
+    insertPlot(wb, sheet = 1, startRow= 2, startCol = 2, width = 1.75 , height = 0.3)
+    # dev.off()
+
+
     
     # Add Styling
     addStyle(wb, 1, style = sty, row = 1:19, cols = 1:6, gridExpand = TRUE)
     addStyle(wb, 1, style = styTitle, row = 14, cols = 2, gridExpand = TRUE)
     addStyle(wb, 2, style = styConcept, row = 1:6, cols = 1, gridExpand = TRUE)
     addStyle(wb, 2, style = styDefinition, row = 1:6, cols = 2, gridExpand = TRUE)
-    addStyle(wb, 3, style = styConcept, row = 1, cols = 1:50, gridExpand = TRUE)
+    addStyle(wb, 3, style = styConcept, row = 9, cols = 1:50, gridExpand = TRUE)
     modifyBaseFont(wb, fontSize = 8, fontName = "Arial")
     
     # Set Column Width
@@ -95,9 +107,12 @@ sszDownloadExcel <- function(filteredData, title){
     setColWidths(wb, sheet = 2, cols = "B", widths = 60)
     
     
-    # Show Excel
-    openXL(wb)
-}   
+    # Save Excel
+    # openXL(wb)
+    saveWorkbook(wb, file, overwrite = TRUE) ## save to working directory
+}
 
+    
+# sszDownloadExcel(preparedData, file, "Ganze Stadt", "Alle Whg", "3Zimmer", "Mietpreis pro Whg", "Nettomiete")    
 
-sszDownloadExcel(preparedData, "Titel für Data")    
+# saveWorkbook(wb, file, directorysszDownloadExcel(preparedData, "Ganze Stadt", "Alle Whg", "3Zimmer", "Mietpreis pro Whg", "Nettomiete"))
