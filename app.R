@@ -229,13 +229,14 @@ server <- function(input, output) {
                  select(GliederungLang, WertNum, WertNum2, ci50) 
 
         data_detail <- filteredData() %>% 
-            dplyr::select(GliederungLang, qu10, qu25, qu50, qu75, qu90, ci10, ci25, ci50, ci75, ci90) %>%
+            dplyr::select(GliederungLang, starts_with("qu"), mean, starts_with("ci")) %>%
             gather(key, value, -GliederungLang) %>% 
             mutate(Art = case_when(
                 startsWith(key, "qu") ~ "Wert",
+                startsWith(key, "mean") ~ "Wert",
                 startsWith(key, "ci") ~ "Konfidenzintervall"
             )) %>% 
-            mutate(Perzentil = case_when(
+            mutate(Lagemass = case_when(
                 key == "qu10" ~ "10. Perzentil",
                 key == "qu25" ~ "25. Perzentil",
                 key == "qu50" ~ "50. Perzentil",
@@ -246,11 +247,13 @@ server <- function(input, output) {
                 key == "ci25" ~ "25. Perzentil",
                 key == "ci50" ~ "50. Perzentil",
                 key == "ci75" ~ "75. Perzentil",
-                key == "ci90" ~ "90. Perzentil"
+                key == "ci90" ~ "90. Perzentil",
+                key == "mean" ~ "Durchschnitt",
+                key == "cimean" ~ "Durchschnitt"
             )) %>% 
             select(-key) %>%
             spread(Art, value) %>%
-            select(GliederungLang, Perzentil, Wert, Konfidenzintervall)
+            select(GliederungLang, Lagemass, Wert, Konfidenzintervall)
         
         tableOutput2 <- reactable(data_mietobjekt,
                                   paginationType = "simple",

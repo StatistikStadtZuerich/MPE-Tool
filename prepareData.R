@@ -70,6 +70,12 @@ data <- dataQuadrmpreis %>%
   mutate(ci25 = paste(qu25l, qu25u, sep = " bis ")) %>% 
   mutate(ci50 = paste(qu50l, qu50u, sep = " bis ")) %>% 
   mutate(ci75 = paste(qu75l, qu75u, sep = " bis ")) %>% 
-  mutate(ci90 = paste(qu90l, qu90u, sep = " bis ")) 
+  mutate(ci90 = paste(qu90l, qu90u, sep = " bis ")) %>% 
+  mutate(cimean = paste(meanl, meanu, sep = " bis ")) %>% 
+  select(-ends_with("u"), -ends_with("l")) %>% 
+  select(StichtagDatJahr, StichtagDatMonat, RaumeinheitSort, RaumeinheitLang, GliederungSort, 
+         GliederungLang, ZimmerSort, ZimmerLang, GemeinnuetzigSort, GemeinnuetzigLang, EinheitSort, 
+         EinheitLang, PreisartSort, PreisartLang, mean, cimean, qu10, ci10, qu25, ci25, qu50, ci50,
+         qu75, ci75, qu90, ci90, Domain, Sample1, Sample2)
   
 rm(df, data_prep, dataQuadrmpreis, dataWhgpreis)
