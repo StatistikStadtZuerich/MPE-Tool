@@ -110,23 +110,24 @@ ui <- fluidPage(
             
             
             # Example Download Button
-            h3("Daten herunterladen"),
-            # Download Panel
-            tags$div(
-                id = "downloadWrapperId",
-                class = "downloadWrapperDiv",
-                sszDownload("csvDownload",
-                            label = "csv"
-                ),
-                sszDownload("excelDownload",
-                            label = "xlsx"
-                ),
-                actionButton(inputId = "ogdDown",
-                             label = "OGD",
-                             onclick ="window.open('https://data.stadt-zuerich.ch/', '_blank')"
+            conditionalPanel(
+                condition = 'input.ActionButtonId',
+                h3("Daten herunterladen"),
+                # Download Panel
+                tags$div(
+                    id = "downloadWrapperId",
+                    class = "downloadWrapperDiv",
+                    sszDownload("csvDownload",
+                                label = "csv"
+                    ),
+                    sszDownload("excelDownload",
+                                label = "xlsx"
+                    ),
+                    actionButton(inputId = "ogdDown",
+                                 label = "OGD",
+                                 onclick ="window.open('https://data.stadt-zuerich.ch/', '_blank')"
+                    )
                 )
-                
-                
             )
         ),
         
@@ -334,7 +335,7 @@ server <- function(input, output) {
     # CSV
     output$csvDownload <- downloadHandler(
         filename = function() {
-            paste("data-", Sys.Date(), ".csv", sep="")
+            paste("MPE-", Sys.Date(), ".csv", sep="")
         },
         content = function(file) {
             write.csv(filteredData(), file, fileEncoding = "UTF-8")
@@ -344,7 +345,7 @@ server <- function(input, output) {
     # Excel
     output$excelDownload <- downloadHandler(
         filename = function() {
-            paste("data-", Sys.Date(), ".xlsx", sep="")
+            paste("MPE-", Sys.Date(), ".xlsx", sep="")
         },
         content = function(file) {
             sszDownloadExcel(filteredData_excel(), file, input$select, input$ButtonGroupLabel, input$ButtonGroupLabel2, input$ButtonGroupLabel3, input$ButtonGroupLabel4)

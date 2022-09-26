@@ -37,7 +37,8 @@ sszDownloadExcel <- function(filteredData, file, selctedArea, selctedWhg, select
     styConcept <- createStyle(textDecoration=c("bold"),
                             valign = "top",
                             wrapText = TRUE)
-    styDefinition <- createStyle(wrapText = TRUE)
+    styDefinition <- createStyle( valign = "top",
+                                  wrapText = TRUE)
     styTitle <- createStyle(fontName = "Arial Black")
     
     # Create Workbook
