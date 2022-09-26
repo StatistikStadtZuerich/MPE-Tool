@@ -13,7 +13,7 @@ source("sszDownload.R", local = TRUE)
 source("prepareData.R", local = TRUE)
 
 # Source Export Excel
-source("prepareExcel/exportExcel.R", local = TRUE)
+source("prepareExcel/exportExcel.R", local = TRUE, encoding = "UTF-8")
 
 # Set the Icon path
 icon <- icon_set("icons/")
