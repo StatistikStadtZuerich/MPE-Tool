@@ -224,7 +224,9 @@ server <- function(input, output) {
             )) %>% 
             select(-key) %>%
             spread(Art, value) %>%
-            select(GliederungLang, Lagemass, Wert, Konfidenzintervall)
+            mutate(WertNum = as.numeric(Wert),
+                   Spacer = NA) %>% 
+            select(GliederungLang, Lagemass, Wert, Spacer, Konfidenzintervall)
         
         tableOutput2 <- reactable(data_mietobjekt,
                                   paginationType = "simple",
@@ -245,19 +247,24 @@ server <- function(input, output) {
                                   columns = list(
                                       GliederungLang = colDef(
                                           name = "Gliederung",
+                                          minWidth = 50,
+                                          sortable = FALSE),
+                                      WertNum = colDef(
+                                          name = "Median",
+                                          align = "right",
                                           minWidth = 50),
-                                      WertNum = colDef(name = "Median",
-                                                        align = "right",
-                                                        minWidth = 50),
                                       WertNum2 = colDef(
                                           name = "",
                                           align = "left",
                                           cell = function(value) {
                                               width <- paste0(value / max(data_mietobjekt$WertNum2) * 100, "%")
-                                              bar_chart(width = width, fill = "#6995C3")
-                                          }),
+                                              bar_chart(width = width, fill = "#3e46dd")
+                                          },
+                                          class = "bar",
+                                          headerClass = "barHeader"),
                                       ci50 = colDef(
-                                          name = "Konfidenzintervall"
+                                          name = "Konfidenzintervall",
+                                          align = "left"
                                       )),
                                   details = function(index) {
                                       det <- filter(data_detail, GliederungLang == data_mietobjekt$GliederungLang[index]) %>% select(-GliederungLang)
@@ -272,11 +279,29 @@ server <- function(input, output) {
                                                         borderColor = "#DEDEDE"
                                                     ),
                                                     columns = list(
-                                                        Wert = colDef(
-                                                            name = "Wert"
+                                                        Lagemass = colDef(
+                                                            name = "Lagemass",
+                                                            align = "left",
+                                                            minWidth = 50,
+                                                            sortable = FALSE
                                                         ),
+                                                        Wert = colDef(
+                                                            name = "Wert",
+                                                            align = "right",
+                                                            minWidth = 50,
+                                                            sortable = FALSE
+                                                        ),
+                                                        Spacer = colDef(
+                                                            name = "",
+                                                            align = "left",
+                                                            minWidth = 100,
+                                                            sortable = FALSE,
+                                                            class = "spacer",
+                                                            headerClass = "spacerHeader"),
                                                         Konfidenzintervall = colDef(
-                                                            name = "Konfidenzintervall"
+                                                            name = "Konfidenzintervall",
+                                                            minWidth = 100,
+                                                            sortable = FALSE
                                                         )
                                                         
                                                     )

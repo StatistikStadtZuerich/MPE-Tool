@@ -88,7 +88,7 @@ a:hover {
 }
 
 /* Media Queries */
-@media screen and (max-width: 799px) {
+@media screen and (max-width: 767px) {
   p {
     font-size: 14px;
     line-height: 23px;
@@ -110,8 +110,8 @@ a:hover {
     line-height: 23px;
   }
   hr {
-  margin-top: 12px;
-  margin-bottom: 16px;
+    margin-top: 12px;
+    margin-bottom: 16px;
   }
 }
 
@@ -137,9 +137,22 @@ a:hover {
     line-height: 23px;
   }
   hr {
-  margin-top: 12px;
-  margin-bottom: 16px;
+    margin-top: 12px;
+    margin-bottom: 16px;
   }
+  
+ .bar {
+   display: none;
+ }
+ .barHeader {
+   display: none;
+ }
+ .spacer {
+   display: none;
+ }
+ .spacerHeader {
+   display: none;
+ }
 }
 
 
@@ -376,6 +389,9 @@ a:hover {
   visibility:hidden;
 }
 
+.rt-tbody {
+  font-family: HelveticaNeueLTW01_55Roman;
+}
 
  /*******************************
  * Text Input
@@ -485,7 +501,7 @@ button:active {
  
  /* Table */
 .rt-table {
-   font-size: 12px;
+   font-size: 11px;
    color: #646464;
    border: 0px;
  }
