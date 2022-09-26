@@ -22,10 +22,10 @@ df <- read.csv("O:/Publikationen/7_Webartikel/2022/WEB_010_2022_Mietpreiserhebun
                sep = ",", encoding = "UTF-8" ) %>%
   rename(StichtagDatJahr = X.U.FEFF.StichtagDatJahr)
 
-# ##URL
-URL <- c("https://gist.githubusercontent.com/DonGoginho/2ea874a3e8c36457635bbb0f6eedaed3/raw/d9060f682bc773b06fbb07ac16f2788d6a7247f2")
-
-##Download
+# # URL
+# URL <- c("https://gist.githubusercontent.com/DonGoginho/2ea874a3e8c36457635bbb0f6eedaed3/raw/d9060f682bc773b06fbb07ac16f2788d6a7247f2")
+#
+# # Download
 # dataDownload <- function(link) {
 #   data <- data.table::fread(link,
 #                             encoding = "UTF-8")

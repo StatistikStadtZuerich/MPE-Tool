@@ -187,47 +187,16 @@ server <- function(input, output) {
     output$table <- renderReactable({
         
         # Render a bar chart with a label on the left
-        # bar_chart <- function(label, width = "100%", height = "2rem", fill = "#00bfc4", background = NULL) {
-        #     bar <- div(style = list(background = fill, width = width, height = height))
-        #     chart <- div(style = list(flexGrow = 1, marginLeft = "1.0rem", background = background), bar)
-        #     div(style = list(display = "flex"), label, chart)
-        # }
         bar_chart <- function(width = "100%", height = "2rem", fill = "#00bfc4", background = NULL) {
             bar <- div(style = list(background = fill, width = width, height = height))
             chart <- div(style = list(flexGrow = 1, marginLeft = "1.0rem", background = background), bar)
             div(style = list(display = "flex"), chart)
         }
-        
-        
-        # bar_chart <- function(width = "100%", height = "2rem", fill = "#00bfc4", background = NULL) {
-        #     bar <- div(style = list(background = fill, width = width, height = height))
-        #     chart <- div(style = list(flexGrow = 1, marginLeft = "0.0rem", background = background), bar)
-        #     image = div(style = list(display = "flex"), chart)
-        #     
-        #     list(backgroundImage = image)
-        # }
-        
-        
-        bar_style <- function(width = 1, fill = "#e6e6e6", height = "2.8rem",
-                              color = NULL) {
-                position <- paste0(width * 100, "%")
-                image <- sprintf("linear-gradient(90deg, %1$s %2$s, transparent %2$s)", fill, position)
-            
-            list(
-                backgroundImage = image,
-                backgroundSize = paste("100%", height),
-                backgroundRepeat = "no-repeat",
-                backgroundPosition = "top - 3px",
-                color = color
-            )
-        }
-        
-        
+    
         # Prepare dfs
         data_mietobjekt <- filteredData() %>% 
                  mutate(WertNum2 = as.numeric(qu50)) %>%
                  mutate(WertNum = qu50) %>% 
-                 # mutate(WertNum = qu50) %>%
                  select(GliederungLang, WertNum, WertNum2, ci50) 
 
         data_detail <- filteredData() %>% 
@@ -287,13 +256,6 @@ server <- function(input, output) {
                                               width <- paste0(value / max(data_mietobjekt$WertNum2) * 100, "%")
                                               bar_chart(width = width, fill = "#6995C3")
                                           }),
-                                      # WertNum = colDef(
-                                      #     name = "Median",
-                                      #     style = function(value) {
-                                      #         bar_style(width = value / max(data_mietobjekt$WertNum), fill = "#6995C3", color = "#fff")
-                                      #     },
-                                      #     align = "left"
-                                      # ),
                                       ci50 = colDef(
                                           name = "Konfidenzintervall"
                                       )),

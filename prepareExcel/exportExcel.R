@@ -112,6 +112,7 @@ sszDownloadExcel <- function(filteredData, file, selctedArea, selctedWhg, select
     saveWorkbook(wb, file, overwrite = TRUE) ## save to working directory
 }
 
-  
+
+# # Test Function
 # sszDownloadExcel(preparedData, "test.xlsx", "Ganze Stadt", "Alle Whg", "3Zimmer", "Mietpreis pro Whg", "Nettomiete")    
 
