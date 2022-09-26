@@ -45,8 +45,7 @@ ui <- fluidPage(
                     class = "radioDiv",
                     radioButtons(inputId = "ButtonGroupLabel",
                                  label = "Typ der Wohnung:",
-                                 choices = unique(data$GemeinnuetzigLang),
-                                 selected = "Alle Wohnungen" # default value
+                                 choices = unique(data$GemeinnuetzigLang)
                     )
                 )
             ),
@@ -57,7 +56,7 @@ ui <- fluidPage(
                 # Example radioButtons() vertical
                 tags$div(
                     class = "radioDiv",
-                    radioButtons(inputId = "ButtonGroupLabel",
+                    radioButtons(inputId = "ButtonGroupLabel1",
                                  label = "Typ der Wohnung:",
                                  choices = c("Alle Wohnungen"),
                                  selected = "Alle Wohnungen" # default value
