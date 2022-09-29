@@ -548,9 +548,9 @@ button:active {
     cursor: default;
 }
 
-.rt-td-inner {
+/*.rt-td-inner {
   background-color: yellow;
-}
+}*/
 
 /* Activate Background-color and pointer on hover */
 .ReactTable .rt-tr:hover .rt-td {
