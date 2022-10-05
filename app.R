@@ -7,13 +7,13 @@ library(icons)
 library(xlsx)
 
 # Source Donwload Function
-source("sszDownload.R", local = TRUE)
+source("sszDownload.R")
 
 # Source Data Load
-source("prepareData.R", local = TRUE)
+source("prepareData.R")
 
 # Source Export Excel
-source("prepareExcel/exportExcel.R", local = TRUE, encoding = "UTF-8")
+source("prepareExcel/exportExcel.R", encoding = "UTF-8")
 
 # Set the Icon path
 icon <- icon_set("icons/")
