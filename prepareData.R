@@ -18,7 +18,7 @@ package.check <- lapply(
 
 ### Load Data
 # TODO: Change data load to OGD (data is only available from the Filer right now)
-df <- read.csv("O:/Publikationen/7_Webartikel/2022/WEB_010_2022_Mietpreiserhebung/3_Ergebnisse/OGD_Export.csv",
+df <- read.csv("O:/Publikationen/7_Webartikel/2022/WEB_010_2022_Mietpreiserhebung/03_Ergebnisse/OGD_Export.csv",
                sep = ",", encoding = "UTF-8" ) %>%
   rename(StichtagDatJahr = X.U.FEFF.StichtagDatJahr)
 
