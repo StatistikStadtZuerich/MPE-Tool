@@ -507,7 +507,7 @@ button:active {
  }
  
  /* Table Header */
-.rt-thead.-header {
+.rt-thead {
    color: #0F05A0;
    font-family: HelveticaNeueLTW05_85Heavy;
  }
