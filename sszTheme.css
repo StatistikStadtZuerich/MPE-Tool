@@ -490,7 +490,6 @@ button:active {
     background-color: #0F05A0;
     color: white;
     outline-color: transparent;
-    outline-style: solid;
     transition: 0.7s;
 }
 
@@ -507,7 +506,7 @@ button:active {
  }
  
  /* Table Header */
-.rt-thead.-header {
+.rt-thead {
    color: #0F05A0;
    font-family: HelveticaNeueLTW05_85Heavy;
  }
@@ -518,29 +517,25 @@ button:active {
   color: #646464
 }
 
-.rt-page-button {
-    padding: 6px 12px;
-    background-color: transparent;
+.rt-expander-button:hover {
+    background: none;
     border: none;
-    outline-width: 0;
-    outline-style: solid;
     cursor: pointer;
-    color: #646464;
-    border-radius: 50px;
+    margin: 0 2px;
+    padding: 0;
 }
 
-.rt-page-button:hover {
-    background-color: rgba(15, 5, 160, 0.08);
-    color: #070250;
-    transition: 0.7s;
-}
-
-.rt-page-button:active {
-    background-color: #0F05A0;
-    color: white;
+.rt-expander-button:active {
+    background: none;
+    border: none;
+    cursor: pointer;
     outline-color: transparent;
-    outline-style: solid;
-    transition: 0.7s;
+}
+
+.rt-expander-button:focus {
+    background: none;
+    border: none;
+    outline-color: transparent;
 }
 
 .rt-page-button:disabled {
@@ -548,9 +543,6 @@ button:active {
     cursor: default;
 }
 
-/*.rt-td-inner {
-  background-color: yellow;
-}*/
 
 /* Activate Background-color and pointer on hover */
 .ReactTable .rt-tr:hover .rt-td {
