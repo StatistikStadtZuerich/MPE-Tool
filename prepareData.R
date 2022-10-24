@@ -90,11 +90,11 @@ tryCatch(                       # Applying tryCatch
   },
   
   error = function(e){          # Specifying error message
-    message("Here's the original error message")
+    message("Error in Data Load")
     return(NULL)
   },
   
   warning = function(w){        # Specifying warning message
-    message("There was a warning message.")
+    message("Warning in Data Load")
   }
 )

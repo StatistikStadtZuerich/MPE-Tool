@@ -27,7 +27,8 @@ if(is.null(data)) {
         # Include CSS
         includeCSS("sszTheme.css"),
         
-        h4("Aufgrund momentaner Wartungsarbeiten ist die Applikation zur Zeit nicht verfügbar.")
+        h1("Fehler"),
+        p("Aufgrund momentaner Wartungsarbeiten ist die Applikation zur Zeit nicht verfügbar.")
     )
     
     # Server function
