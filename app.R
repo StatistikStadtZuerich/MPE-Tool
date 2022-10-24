@@ -27,7 +27,7 @@ if(is.null(data)) {
         # Include CSS
         includeCSS("sszTheme.css"),
         
-        h3("Da ist etwas schief gegangen!")
+        h4("Aufgrund momentaner Wartungsarbeiten ist die Applikation zur Zeit nicht verfügbar.")
     )
     
     # Server function
@@ -162,7 +162,7 @@ if(is.null(data)) {
                     # Define subtitle
                     tags$div(
                         class = "infoDiv",
-                        p("Für Detailinformationen zur Verteilung der geschätzten Mietpreise wählen Sie eine Zeile aus. Alle Angaben in Schweizer Franken.")
+                        p("Für Detailinformationen zur Verteilung der geschätzten Mietpreise wählen Sie eine Zeile aus (alle Angaben in CHF/Monat).")
                     )
                 ),
                 conditionalPanel(
@@ -212,11 +212,19 @@ if(is.null(data)) {
                 div(style = list(display = "flex"), chart)
             }
         
-            # Prepare dfs
-            data_mietobjekt <- filteredData() %>% 
-                     mutate(WertNum2 = as.numeric(qu50)) %>%
-                     mutate(WertNum = qu50) %>% 
-                     select(GliederungLang, WertNum, WertNum2, ci50) 
+            # Prepare df
+            if(input$ButtonGroupLabel3 == "Mietpreis pro Quadratmeter"){
+                data_mietobjekt <- filteredData() %>% 
+                    mutate(WertNum2 = as.numeric(qu50)) %>%
+                    mutate(WertNum = as.numeric(qu50)) %>% 
+                    select(GliederungLang, WertNum, WertNum2, ci50) 
+            }else{
+                data_mietobjekt <- filteredData() %>% 
+                    mutate(WertNum2 = as.numeric(qu50)) %>%
+                    mutate(WertNum = as.integer(qu50)) %>% 
+                    select(GliederungLang, WertNum, WertNum2, ci50)
+            }
+             
     
             data_detail <- filteredData() %>% 
                 dplyr::select(GliederungLang, starts_with("qu"), mean, starts_with("ci")) %>%
@@ -229,13 +237,13 @@ if(is.null(data)) {
                 mutate(Lagemass = case_when(
                     key == "qu10" ~ "10. Perzentil",
                     key == "qu25" ~ "25. Perzentil",
-                    key == "qu50" ~ "50. Perzentil",
+                    key == "qu50" ~ "Median",
                     key == "qu75" ~ "75. Perzentil",
                     key == "qu10" ~ "90. Perzentil",
                     key == "qu90" ~ "90. Perzentil",
                     key == "ci10" ~ "10. Perzentil",
                     key == "ci25" ~ "25. Perzentil",
-                    key == "ci50" ~ "50. Perzentil",
+                    key == "ci50" ~ "Median",
                     key == "ci75" ~ "75. Perzentil",
                     key == "ci90" ~ "90. Perzentil",
                     key == "mean" ~ "Durchschnitt",
@@ -243,6 +251,8 @@ if(is.null(data)) {
                 )) %>% 
                 select(-key) %>%
                 spread(Art, value) %>%
+                mutate(Lagemass = fct_relevel(Lagemass, c("10. Perzentil", "25. Perzentil", "Median", "75. Perzentil", "90. Perzentil", "Durchschnitt"))) %>% 
+                arrange(Lagemass) %>% 
                 mutate(WertNum = as.numeric(Wert),
                        Spacer = NA) %>% 
                 select(GliederungLang, Lagemass, Wert, Spacer, Konfidenzintervall)
@@ -338,13 +348,26 @@ if(is.null(data)) {
             
             
             filtered <- filteredData() %>%
-                rename(Raumeinheit = RaumeinheitLang,
+                rename(Jahr = StichtagDatJahr,
+                       Raumeinheit = RaumeinheitLang,
                        Gliederung = GliederungLang,
                        Zimmer = ZimmerLang,
                        Gemeinnützig = GemeinnuetzigLang,
                        Einheit = EinheitLang,
-                       Preisart = PreisartLang) %>% 
-                select(-ends_with("Sort"))
+                       Preisart = PreisartLang,
+                       Durchschnittspreis = mean,
+                       `95. KI (Durchschnittspreis)` = cimean,
+                       `Preis 10. Perzentil` = qu10,
+                       `95. KI (10. Perzentil)` = ci10,
+                       `Preis 25. Perzentil` = qu25,
+                       `95. KI (25. Perzentil)` = ci25,
+                       Medianpreis = qu50,
+                       `95. KI (Medianpreis)` = ci50,
+                       `Preis 75. Perzentil` = qu75,
+                       `95. KI (75. Perzentil)` = ci75,
+                       `Preis 90. Perzentil` = qu90,
+                       `95. KI (90. Perzentil)` = ci90) %>% 
+                select(-ends_with("Sort"), -StichtagDatMonat)
             filtered
         })
         
