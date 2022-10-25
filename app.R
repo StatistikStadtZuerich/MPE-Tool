@@ -15,10 +15,10 @@ library(data.table)
 
 
 # Source Donwload Function
-source("sszDownload.R")
+source("sszDownload.R", encoding = "UTF-8")
 
 # Source Data Load
-source("prepareData.R")
+source("prepareData.R", encoding = "UTF-8")
 
 # Source Export Excel
 source("prepareExcel/exportExcel.R", encoding = "UTF-8")
