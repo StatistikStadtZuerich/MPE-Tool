@@ -7,11 +7,9 @@ sszDownloadExcel <- function(filteredData, file, selctedArea, selctedWhg, select
     # Read Data
     data <- read_excel(hauptPfad, sheet = 1)
     definitions <- read_excel(hauptPfad, sheet = 2)
-    logo <- load.image(imagePfad)
     
     # Manipulate Data
     # Data Sheet 1
-    data <- read_excel(hauptPfad, sheet = 1)
     data <- data %>%
       mutate(
         Date = ifelse(is.na(Date), NA, paste0(format(Sys.Date(), "%d"), ".", format(Sys.Date(), "%m"), ".", format(Sys.Date(), "%Y"))),
@@ -22,8 +20,6 @@ sszDownloadExcel <- function(filteredData, file, selctedArea, selctedWhg, select
       as.data.frame()
       
     # Data Sheet 2
-    bdf <- as.data.frame(logo)
-    
     # Styling
     sty <- createStyle(fgFill="#ffffff")
     styConcept <- createStyle(textDecoration=c("bold"),
@@ -67,22 +63,9 @@ sszDownloadExcel <- function(filteredData, file, selctedArea, selctedWhg, select
             startRow = 9,
             withFilter = FALSE)
     
-    # Wrap Image into Plot
-    p <-ggplot(bdf,aes(x,y))+geom_raster(aes(fill=value))+
-    theme_void() +
-    theme(legend.position = "none") +
-    scale_fill_gradient(low="black",high="white") +
-    scale_y_continuous(expand=c(0,0),
-                       trans=scales::reverse_trans()) +
-    scale_x_continuous(expand=c(0,0))
+    # Insert Logo on Sheet 1
+    insertImage(wb, imagePfad, sheet = 1, startRow= 2, startCol = 2, width = 1.75 , height = 0.3)
 
-    # Insert Plot on Sheet 1
-    print(p)
-    insertPlot(wb, sheet = 1, startRow= 2, startCol = 2, width = 1.75 , height = 0.3)
-    # dev.off()
-
-
-    
     # Add Styling
     addStyle(wb, 1, style = sty, row = 1:19, cols = 1:6, gridExpand = TRUE)
     addStyle(wb, 1, style = styTitle, row = 14, cols = 2, gridExpand = TRUE)
@@ -101,11 +84,5 @@ sszDownloadExcel <- function(filteredData, file, selctedArea, selctedWhg, select
     
     
     # Save Excel
-    # openXL(wb)
     saveWorkbook(wb, file, overwrite = TRUE) ## save to working directory
 }
-
-
-# # Test Function
-# sszDownloadExcel(preparedData, "test.xlsx", "Ganze Stadt", "Alle Whg", "3Zimmer", "Mietpreis pro Whg", "Nettomiete")    
-
