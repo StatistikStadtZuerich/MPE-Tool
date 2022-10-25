@@ -1,10 +1,18 @@
 # Load Library
 library(shiny)
+library(tidyverse)
 library(reactable)
-library(dplyr)
 library(lubridate)
 library(icons)
 library(xlsx)
+library(jpeg)
+library(imager)
+library(openxlsx)
+library(readxl)
+library(httr)
+library(parallel)
+library(data.table)
+
 
 # Source Donwload Function
 source("sszDownload.R")

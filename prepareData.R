@@ -1,20 +1,22 @@
 ### Required packages
-packages <- c("tidyverse",
-              "httr",
-              "parallel",
-              "data.table",
-              "lubridate")
+#packages <- c("tidyverse",
+#"httr",
+#       #      "parallel",
+#             "data.table",
+#             "lubridate")
 
 ### Load packages
-package.check <- lapply(
-  packages,
-  FUN = function(x) {
-    if (!require(x, character.only = TRUE)) {
-      install.packages(x, dependencies = TRUE)
-      library(x, character.only = TRUE)
-    }
-  }
-)
+#package.check <- lapply(
+# packages,
+# FUN = function(x) {
+#   if (!require(x, character.only = TRUE)) {
+#     install.packages(x, dependencies = TRUE)
+#     library(x, character.only = TRUE)
+#   }
+# }
+#)
+
+# https://gist.githubusercontent.com/DonGoginho/2ea874a3e8c36457635bbb0f6eedaed3/raw/d9060f682bc773b06fbb07ac16f2788d6a7247f2
 
 ### Load Data
 # # TODO: Change data load to OGD (data is only available from the Filer right now)
@@ -30,7 +32,7 @@ tryCatch(                       # Applying tryCatch
   expr = {                      # Specifying expression
 
     # URL
-    URL <- c("https://gist.githubusercontent.com/DonGoginho/2ea874a3e8c36457635bbb0f6eedaed3/raw/d9060f682bc773b06fbb07ac16f2788d6a7247f2")
+    URL <- c("https://data.integ.stadt-zuerich.ch/dataset/int_dwh_bau_whg_mpe_mietpreis_raum_zizahl_gn_jahr_od5161/download/BAU516OD5161.csv")
     
     # Download
     dataDownload <- function(link) {

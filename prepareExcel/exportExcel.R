@@ -1,16 +1,8 @@
 sszDownloadExcel <- function(filteredData, file, selctedArea, selctedWhg, selectedRoom, selectedLevel, selectedRent){
     
-    # Required Libraries
-    library(jpeg)
-    library(imager)
-    library(openxlsx)
-    library(ggplot2)
-    library(readxl)
-    library(dplyr)
-    
     # Data Paths
-    hauptPfad <- "O:/Projekte/Mietpreisstrukturerhebung/99_Shiny_App/prepareExcel/Titelblatt.xlsx"
-    imagePfad <- "O:/Projekte/Mietpreisstrukturerhebung/99_Shiny_App/prepareExcel/logo_stzh_stat_sw_pos_1.png"
+    hauptPfad <- "prepareExcel/Titelblatt.xlsx"
+    imagePfad <- "prepareExcel/logo_stzh_stat_sw_pos_1.png"
     
     # Read Data
     data <- read_excel(hauptPfad, sheet = 1)
