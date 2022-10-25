@@ -26,7 +26,7 @@ sszDownloadExcel <- function(filteredData, file, selctedArea, selctedWhg, select
         Titel = ifelse(is.na(Titel), NA, paste0("Mietpreise für Ihre Auswahl: ", selctedArea, ", ", selctedWhg, ", ", selectedRoom, ", ", selectedLevel, ", ", selectedRent ))
         )
     
-    selected <- list(c("T_1", "Mietpreise für Ihre Auswahl:", paste0(selctedArea, ", ", selctedWhg, ", ", selectedRoom, ", ", selectedLevel, ", ", selectedRent ), "  ", "Quelle: Statistik Stadt Zürich, Mietpreiserhebung (MPE)")) %>% 
+    selected <- list(c("T_1", "Mietpreise für Ihre Auswahl:", paste0(selctedArea, ", ", selctedWhg, ", ", selectedRoom, ", ", selectedLevel, ", ", selectedRent ), "Alle Angaben sind in CHF/Monat", "Quelle: Statistik Stadt Zürich, Mietpreiserhebung (MPE)")) %>% 
       as.data.frame()
       
     # Data Sheet 2
