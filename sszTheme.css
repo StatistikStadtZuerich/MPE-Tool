@@ -159,6 +159,10 @@ a:hover {
  /*******************************
  * Control Labels
  *******************************/
+ 
+ #ButtonGroupLabel {
+  margin-top: 10px;
+}
 
 /* Control Label Font (Radio Button Title) */
 #ButtonGroupLabel-label {
@@ -170,7 +174,7 @@ a:hover {
   letter-spacing: 0.01em;
   text-align: left;
 }
-#ButtonGroupLabel-label1 {
+#ButtonGroupLabel1-label {
   font-family: HelveticaNeueLTW01_55Roman;
   color: #646464;
   font-weight: 400;
@@ -207,42 +211,6 @@ a:hover {
   text-align: left;
 }
 
-/* Control Label (Text Input) */
-#suchfeld-label.control-label {
-    top: 14px;
-    font-family: 'HelveticaNeueLTW01_55Roman';
-    font-weight: 400;
-    color: #646464;
-    font-size: 12px;
-    line-height: 19px;
-    letter-spacing: 0.01em;
-    text-align: left;
-    position: relative;
-    left: 16px;
-    z-index: 10;
-    background-color: white;
-    padding-left: 2px;
-    padding-right: 2px;
-}
-
-/* Control Label (Date Range) */
-#DateRange-label.control-label {
-    top: 14px;
-    font-family: 'HelveticaNeueLTW01_55Roman';
-    font-weight: 400;
-    font-size: 12px;
-    color: #646464;
-    line-height: 19px;
-    letter-spacing: 0.01em;
-    text-align: left;
-    position: relative;
-    left: 16px;
-    z-index: 10;
-    background-color: white;
-    padding-left: 2px;
-    padding-right: 2px;
-}
-
 /* Control Label (Select Input) */
 #select-label.control-label {
     top: 14px;
@@ -270,10 +238,6 @@ a:hover {
 .radioDiv {
   margin-top: 18px;
   margin-bottom: 40px;
-}
-
-#ButtonGroupLabel {
-  margin-top: 10px;
 }
 
 /* Radio Buttons Text */
@@ -558,180 +522,6 @@ button:active {
 .Details {
   padding-left: 45px;
   border-top: 1px solid #DEDEDE;
-}
-
-
-
- /*******************************
- * Date Range
- *******************************/
-
-/* Date Picker Input Styling */
-.input-group-sm>.form-control, .input-group-sm>.input-group-addon, .input-group-sm>.input-group-btn>.btn {
-    height: 40px;
-    padding: 5px 10px;
-    font-size: 14px;
-}
-
-/* Date Range first Date Input*/
-.input-daterange input:first-child {
-    border-radius: 2px 2px 2px 2px;
-}
-
-.input-daterange input:first-child {
-    border-radius: 2px 2px 2px 2px;
-}
-
-.input-group .form-control:first-child {
-  text-align: left;
-  padding-left: 16px;
-}
-
-/* Date Range second Date Input*/
-.input-daterange input:last-child {
-    border-radius: 2px 2px 2px 2px;
-}
-
-.input-daterange input:last-child {
-    border-radius: 2px 2px 2px 2px;
-}
-
-.input-group .form-control:last-child {
-  text-align: left;
-  padding-left: 16px;
-}
-
-/* Calendar Icon */
-.input-group-addon {
-    background-color:transparent;
-    border: 0;
-    color:  #070250;
-}
-
-/* Date Range Dropdown */
-.dropdown-menu {
-    position: absolute;
-    z-index: 1000;
-    display: none;
-    float: left;
-    min-width: 160px;
-    padding: 16px;
-    margin: 12px 0 0;
-    font-size: 14px;
-    text-align: left;
-    list-style: none;
-    background-color: #fff;
-    background-clip: padding-box;
-    border-color: #646464;
-    border: 0 solid #646464;
-    border-radius: 2px;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.24);
-}
-
-.datepicker-dropdown:before {
-    content: '';
-    display: inline-block;
-    border-left: 7px solid transparent;
-    border-right: 7px solid transparent;
-    border-bottom: transparent;
-    border-top: 0;
-    border-bottom-color: transparent;
-    position: absolute;
-}
-
-.datepicker-dropdown:after {
-    content: '';
-    display: inline-block;
-    border-left: 7px solid transparent;
-    border-right: 7px solid transparent;
-    border-bottom: transparent;
-    border-top: 0;
-    border-bottom-color: transparent;
-    position: absolute;
-}
-
-.datepicker-switch {
-  font-size: 14px;
-  font-family: HelveticaNeueLTW05_85Heavy;
-  color: #646464;
-}
-
-.datepicker .datepicker-switch:hover {
-  color: #070250;
-  background: transparent;
-  transition: 0.7s;
-}
-
-/* Active Day, Month, Year  */
-.datepicker table tr td.active.active {
-  background-color: #0F05A0;
-  border-radius: 99999px;
-}
-
-.datepicker table tr td span.active.active {
-    background-color: #0F05A0;
-    height: 45px;
-    margin: 1%;
-    cursor: pointer;
-    border-radius: 50px;
-    display: inline-grid;
-    align-content: center;
-}
-
-.datepicker table tr td span.active.active:hover {
-    background-color: #0F05A0;
-}
-
-.datepicker table tr td span.active.active:hover:hover {
-  background-color: #0F05A0;
-}
-
-.datepicker table tr td span {
-    height: 45px;
-    margin: 1%;
-    cursor: pointer;
-    border-radius: 50px;
-    display: inline-grid;
-    align-content: center;
-}
-
-.datepicker table tr td span:hover, .datepicker table tr td span.focused {
-    color: #0F05A0;
-    background: rgba(15, 5, 160, 0.08);
-}
-
-.datepicker table tr td.active.active:hover {
-  background-color: #0F05A0;
-}
-
-.datepicker table tr td span.active.active:hover {
-  background-color: #0F05A0;
-}
-
-/* Disable Century*/
-.datepicker table tr td span.active.disabled.active {
-   background-color: #0F05A0;
-}
-
-.datepicker table tr td span.active.disabled:hover, .datepicker table tr td span.active.disabled:focus, .datepicker table tr td span.active.disabled.focus, .datepicker table tr td span.active[disabled]:hover, .datepicker table tr td span.active[disabled]:focus, .datepicker table tr td span.active.focus[disabled], fieldset[disabled] .datepicker table tr td span.active:hover, fieldset[disabled] .datepicker table tr td span.active:focus, fieldset[disabled] .datepicker table tr td span.active.focus, .datepicker table tr td span.active.disabled:hover:hover, .datepicker table tr td span.active.disabled:hover:focus, .datepicker table tr td span.active.disabled.focus:hover, .datepicker table tr td span.active[disabled]:hover:hover, .datepicker table tr td span.active[disabled]:hover:focus, .datepicker table tr td span.active.focus[disabled]:hover, fieldset[disabled] .datepicker table tr td span.active:hover:hover, fieldset[disabled] .datepicker table tr td span.active:hover:focus, fieldset[disabled] .datepicker table tr td span.active.focus:hover, .datepicker table tr td span.active.disabled.disabled:hover, .datepicker table tr td span.active.disabled.disabled:focus, .datepicker table tr td span.active.disabled.disabled.focus, .datepicker table tr td span.active.disabled[disabled]:hover, .datepicker table tr td span.active.disabled[disabled]:focus, .datepicker table tr td span.active.disabled.focus[disabled], fieldset[disabled] .datepicker table tr td span.active.disabled:hover, fieldset[disabled] .datepicker table tr td span.active.disabled:focus, fieldset[disabled] .datepicker table tr td span.active.disabled.focus, .datepicker table tr td span.active.disabled.disabled:hover:hover, .datepicker table tr td span.active.disabled.disabled:hover:focus, .datepicker table tr td span.active.disabled.disabled.focus:hover, .datepicker table tr td span.active.disabled[disabled]:hover:hover, .datepicker table tr td span.active.disabled[disabled]:hover:focus, .datepicker table tr td span.active.disabled.focus[disabled]:hover, fieldset[disabled] .datepicker table tr td span.active.disabled:hover:hover, fieldset[disabled] .datepicker table tr td span.active.disabled:hover:focus, fieldset[disabled] .datepicker table tr td span.active.disabled.focus:hover {
-    background-color: #0F05A0;
-}
-
-/* Inactive Day */
-.datepicker table tr td.day:hover {
-  color: #0F05A0;
-  background: rgba(15, 5, 160, 0.08);
-  border-radius: 99999px;
-}
-
-/* Old Day */
-.datepicker table tr td.old, .datepicker table tr td.new {
-    color: #BFBFBF;
-}
-
-/* Days */
-.day {
-  color: #646464;
 }
 
 
