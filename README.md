@@ -10,13 +10,23 @@ The MPE does not record any information on the standard of fit-out, condition, e
 The data is obtained from the Open Data portal of the city of Zurich and is available [here](https://data.stadt-zuerich.ch/dataset?tags=mpe).
 
 ## Glossary
-# Rental apartments in the population
+### Rental apartments in the population
 The population in the MPE consits of all 2-, 3- and 4-room apartments in the city of Zurich that are offered for rent unfurnished and without specified restrictions on the possible tenant base. Apartmentes that are only offered to a limited group of people are considered to be apartments in retirement homes, student apartments such as those of the [Studentische Wohngenossenschaft Zürich (WOKO)](https://www.woko.ch/), as well as service and staff apartments of asylums, hospitals, hospitality industry and the like. Furnished apartments are apartments that are known to be rented out on a commercial basis for a limited period of time.
 
-## Non-profit status
+### Non-profit status
 First of all, non-profit apartments include all apartments owned by the City of Zurich or by cooperatives, associations or foundations and and are managed according to the principle of cost rent. Furthermore, the category of non-profit includes apartments whose ownership is considered non-profit in the broader sense and does not rent its rental properties exclusively according to the principle of cost rent (certain foundations, associations and stock corporations). The cost rent is used to pay the interest on debts and the administrative costs, as well as to ensure the maintenance and value retention of the properties and the provisions for renewal. In the medium to long term, the cost rent results in lower rents than for comparable properties on the housing market.
 
-# Architecture
+### Market indicators
+The market indicators characterize the type of tenancy. The following five categories are distinguished:
+
+- New built rents. Rents in buildings that are no more than two years old.
+- Reference rents: Tenancy with duration ≤ 2 years in older buildings.
+- Existing rents 2-10 years: Tenancy with duration > 2 and ≤ 10 years.
+- Existing rents 11-20 years: Tenancy with duration > 10 and ≤ 20 years.
+- Existing rents over 20 years: Tenancy with duration > 20 years.
+
+
+## Architecture
 
 ```mermaid
 flowchart LR;
