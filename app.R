@@ -3,7 +3,6 @@ library(shiny)
 library(tidyverse)
 library(reactable)
 library(lubridate)
-library(icons)
 library(xlsx)
 library(jpeg)
 library(imager)
@@ -22,9 +21,6 @@ source("prepareData.R", encoding = "UTF-8")
 
 # Source Export Excel
 source("exportExcel.R", encoding = "UTF-8")
-
-# Set the Icon path
-icon <- icon_set("icons/")
 
 # if data load didn't work show message
 if(is.null(data)) {
@@ -310,7 +306,8 @@ if(is.null(data)) {
                                               headerClass = "barHeader"),
                                           ci50 = colDef(
                                               name = "Konfidenzintervall",
-                                              align = "left"
+                                              align = "left",
+                                              sortable = FALSE
                                           )),
                                       details = function(index) {
                                           det <- filter(data_detail, GliederungLang == data_mietobjekt$GliederungLang[index]) %>% select(-GliederungLang)
