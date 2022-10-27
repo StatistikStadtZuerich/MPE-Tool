@@ -1,19 +1,27 @@
 # Load Library
 library(shiny)
+library(tidyverse)
 library(reactable)
-library(dplyr)
 library(lubridate)
 library(icons)
 library(xlsx)
+library(jpeg)
+library(imager)
+library(openxlsx)
+library(readxl)
+library(httr)
+library(parallel)
+library(data.table)
+
 
 # Source Donwload Function
-source("sszDownload.R")
+source("sszDownload.R", encoding = "UTF-8")
 
 # Source Data Load
-source("prepareData.R")
+source("prepareData.R", encoding = "UTF-8")
 
 # Source Export Excel
-source("prepareExcel/exportExcel.R", encoding = "UTF-8")
+source("exportExcel.R", encoding = "UTF-8")
 
 # Set the Icon path
 icon <- icon_set("icons/")
@@ -77,12 +85,11 @@ if(is.null(data)) {
                         class = "radioDiv",
                         radioButtons(inputId = "ButtonGroupLabel1",
                                      label = "Typ der Wohnung:",
-                                     choices = c("Alle Wohnungen"),
+                                     choices = "Alle Wohnungen",
                                      selected = "Alle Wohnungen" # default value
                         )
                     )
                 ),
-                
                 
                 
                 # Example radioButtons() 2
@@ -180,7 +187,7 @@ if(is.null(data)) {
     
     
     # Server function
-    server <- function(input, output) {
+    server <- function(input, output, session) {
         
         # First button click to activate search, after not necessary anymore
         global <- reactiveValues(activeButton = FALSE)
@@ -194,13 +201,22 @@ if(is.null(data)) {
         filteredData <- reactive({
             req(global$activeButton == TRUE)
             
-            filtered <- data %>%
-                filter(RaumeinheitLang == input$select) %>% 
-                filter(GemeinnuetzigLang == input$ButtonGroupLabel) %>% 
-                filter(ZimmerLang == input$ButtonGroupLabel2) %>% 
-                filter(EinheitLang == input$ButtonGroupLabel3) %>% 
-                filter(PreisartLang == input$ButtonGroupLabel4) 
-            filtered
+            if(input$select == "Quartiere") {
+                filtered <- data %>%
+                    filter(RaumeinheitLang == input$select) %>% 
+                    filter(ZimmerLang == input$ButtonGroupLabel2) %>% 
+                    filter(EinheitLang == input$ButtonGroupLabel3) %>% 
+                    filter(PreisartLang == input$ButtonGroupLabel4) 
+                filtered
+            } else {
+                filtered <- data %>%
+                    filter(RaumeinheitLang == input$select) %>% 
+                    filter(GemeinnuetzigLang == input$ButtonGroupLabel) %>% 
+                    filter(ZimmerLang == input$ButtonGroupLabel2) %>% 
+                    filter(EinheitLang == input$ButtonGroupLabel3) %>% 
+                    filter(PreisartLang == input$ButtonGroupLabel4) 
+                filtered
+            }
         })
         
         
