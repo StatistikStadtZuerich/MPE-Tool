@@ -64,7 +64,7 @@ sszDownloadExcel <- function(filteredData, file, selctedArea, selctedWhg, select
             withFilter = FALSE)
     
     # Insert Logo on Sheet 1
-    insertImage(wb, imagePfad, sheet = 1, startRow= 2, startCol = 2, width = 1.75 , height = 0.3)
+    insertImage(wb, imagePfad, sheet = 1, startRow= 2, startCol = 2, width = 1.75 , height = 0.35)
 
     # Add Styling
     addStyle(wb, 1, style = sty, row = 1:19, cols = 1:6, gridExpand = TRUE)
