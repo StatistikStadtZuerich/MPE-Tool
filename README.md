@@ -25,6 +25,11 @@ The market indicators characterize the type of tenancy. The following five categ
 - Existing rents 11-20 years: Tenancy with duration > 10 and ≤ 20 years.
 - Existing rents over 20 years: Tenancy with duration > 20 years.
 
+### Spatial unit: city quarters
+Because city quarters are too small as spatial unit for a sample survey as the MPE, it is not possible to differentiate rents by non-profit status.
+
+### Spacial unit: city quarters group
+
 
 ## Architecture
 
