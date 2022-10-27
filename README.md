@@ -47,9 +47,9 @@ flowchart LR;
   output2 --> results2[["Resultat Level \n(show percentiles \nand confidence \ninterval)"]]:::result
   output2 --> downloads{Downloads}:::download
   
-  classDef filter fill:#ffff2f,stroke:#ffff2f;
-  classDef button fill:#695eff,stroke:#695eff;
-  classDef data fill:#edade6,stroke:#acb0b0;
-  classDef result fill:#59e6f0,stroke:#acb0b0;
-  classDef download fill:#43cc4c,stroke:#43cc4c;
+  classDef filter fill:#ffff2f,stroke:#ffff2f,color:#000000;
+  classDef button fill:#695eff,stroke:#695eff,color:#000000;
+  classDef data fill:#edade6,stroke:#acb0b0,color:#000000;
+  classDef result fill:#59e6f0,stroke:#acb0b0,color:#000000;
+  classDef download fill:#43cc4c,stroke:#43cc4c,color:#000000;
 ```
