@@ -16,7 +16,7 @@ sszDownloadExcel <- function(filteredData, file, selctedArea, selctedWhg, select
         Titel = ifelse(is.na(Titel), NA, paste0("Mietpreise für Ihre Auswahl: ", selctedArea, ", ", selctedWhg, ", ", selectedRoom, ", ", selectedLevel, ", ", selectedRent ))
         )
     
-    selected <- list(c("T_1", "Mietpreise für Ihre Auswahl:", paste0(selctedArea, ", ", selctedWhg, ", ", selectedRoom, ", ", selectedLevel, ", ", selectedRent ), "Alle Angaben sind in CHF/Monat", "Quelle: Statistik Stadt Zürich, Mietpreiserhebung (MPE)")) %>% 
+    selected <- list(c("T_1", "Mietpreise für Ihre Auswahl:", paste0(selctedArea, ", ", selctedWhg, ", ", selectedRoom, ", ", selectedLevel, ", ", selectedRent ), "Alle Angaben sind in CHF/Monat", " ","Quelle: Statistik Stadt Zürich, Mietpreiserhebung (MPE)")) %>% 
       as.data.frame()
       
     # Data Sheet 2
@@ -25,8 +25,8 @@ sszDownloadExcel <- function(filteredData, file, selctedArea, selctedWhg, select
     styConcept <- createStyle(textDecoration=c("bold"),
                             valign = "top",
                             wrapText = TRUE)
-    styDefinition <- createStyle( valign = "top",
-                                  wrapText = TRUE)
+    styDefinition <- createStyle(valign = "top",
+                                 wrapText = TRUE)
     styTitle <- createStyle(fontName = "Arial Black")
     
     # Create Workbook
@@ -69,8 +69,8 @@ sszDownloadExcel <- function(filteredData, file, selctedArea, selctedWhg, select
     # Add Styling
     addStyle(wb, 1, style = sty, row = 1:19, cols = 1:6, gridExpand = TRUE)
     addStyle(wb, 1, style = styTitle, row = 14, cols = 2, gridExpand = TRUE)
-    addStyle(wb, 2, style = styConcept, row = 1:7, cols = 1, gridExpand = TRUE)
-    addStyle(wb, 2, style = styDefinition, row = 1:7, cols = 2, gridExpand = TRUE)
+    addStyle(wb, 2, style = styConcept, row = 1:9, cols = 1, gridExpand = TRUE)
+    addStyle(wb, 2, style = styDefinition, row = 1:9, cols = 2, gridExpand = TRUE)
     addStyle(wb, 3, style = styConcept, row = 9, cols = 1:50, gridExpand = TRUE)
     modifyBaseFont(wb, fontSize = 8, fontName = "Arial")
     
