@@ -1,4 +1,4 @@
-FROM rocker/tidyverse:4.0
+FROM rocker/tidyverse:4.0.3
 RUN install2.r rsconnect shiny tidyverse reactable lubridate jpeg readxl httr data.table
 RUN Rscript -e "install.packages('openxslx')"
 WORKDIR /home/mpe-test
