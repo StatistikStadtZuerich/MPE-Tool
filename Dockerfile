@@ -1,5 +1,5 @@
 FROM rocker/tidyverse:4.0
-RUN install2.r rsconnect shiny tidyverse reactable lubridate jpeg imager readxl httr parallel data.table
+RUN install2.r rsconnect shiny tidyverse reactable lubridate jpeg readxl httr parallel data.table
 RUN Rscript -q -e "install.packages('openxslx')"
 WORKDIR /home/mpe-test
 COPY app.R app.R
