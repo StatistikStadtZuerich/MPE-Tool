@@ -1,6 +1,6 @@
 FROM rocker/tidyverse:4.0.3
-RUN install2.r rsconnect shiny tidyverse reactable lubridate jpeg readxl httr data.table Rcpp remotes
-RUN Rscript -e "remotes::install_github('ycphs/openxlsx')"
+RUN install2.r rsconnect shiny reactable jpeg httr data.table Rcpp
+RUN Rscript -e "install.packages('openxlsx')"
 WORKDIR /home/mpe-test
 COPY app.R app.R
 COPY exportExcel.R exportExcel.R
