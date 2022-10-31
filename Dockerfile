@@ -1,5 +1,5 @@
 FROM rocker/shiny-verse:4.0
-RUN install2.r rsconnect shiny tidyverse reactable lubridate xlsx jpeg imager openxslx readxl httr parallel data.table
+RUN install2.r rsconnect shiny tidyverse reactable lubridate xlsx jpeg openxslx readxl httr data.table
 WORKDIR /home/mpe-test
 COPY app.R app.R
 COPY exportExcel.R exportExcel.R
