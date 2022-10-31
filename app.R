@@ -290,7 +290,7 @@ if(is.null(data)) {
                                               minWidth = 50,
                                               sortable = FALSE),
                                           WertNum = colDef(
-                                              name = "Median",
+                                              name = "Median\n(CHF/Monat)",
                                               align = "right",
                                               minWidth = 50),
                                           WertNum2 = colDef(
