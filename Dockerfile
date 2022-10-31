@@ -1,6 +1,6 @@
 FROM rocker/tidyverse:4.0
 RUN install2.r rsconnect shiny tidyverse reactable lubridate jpeg readxl httr data.table
-RUN Rscript -e "install.packages('openxslx')"
+RUN Rscript -e "install.packages('openxslx', repos='https://stat.ethz.ch/CRAN/')"
 WORKDIR /home/mpe-test
 COPY app.R app.R
 COPY exportExcel.R exportExcel.R
