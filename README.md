@@ -1,5 +1,5 @@
 # MPE-Tool
-Shiny app for MPE tool (MietPreisErhebung). By using this application you agree to the disclaimer.
+Shiny app for MPE tool (MietPreisErhebung). By using this application you agree to the [disclaimer](https://www.stadt-zuerich.ch/prd/de/index/statistik/publikationen-angebote/datenbanken-anwendungen/mietpreiserhebung/disclaimer.html). You can find the documentation of the methodology [here](https://www.stadt-zuerich.ch/prd/de/index/statistik/publikationen-angebote/publikationen/methodenbericht/Methodenbericht_Mietpreiserhebung.html).
 
 The MPE application on the website of [Statistik Stadt Zürich](https://www.stadt-zuerich.ch/prd/de/index/statistik/publikationen-angebote/datenbanken-anwendungen/mietpreiserhebung.html) shows estimated average rental prices in the city of Zurich (including prices per square meter, median and the respective quantiles) of 2-, 3- and 4-room rental apartments as of the date of April 1, 2022. The estimated rental prices are based on a stratified sample. On the one hand this sample consist of a non-representative ad hoc sample established over several years, which is collected quarterly (net rental prcies for 50,572 apartments). On the other hand, it consists of a one-time random sample of all remaining rental apartments, which guarantees the necessary representativeness (net rental prices for 5236 apartments).
 
@@ -25,11 +25,11 @@ The market indicators characterize the type of tenancy. The following five categ
 - Existing rents 11-20 years: Tenancy with duration > 10 and ≤ 20 years.
 - Existing rents over 20 years: Tenancy with duration > 20 years.
 
-### Spacial units for queries on property owneship
+### Spatial units for queries on property owneship
 Since it is not possible to differentiate rents by property ownership (profit oriented and non-profit oriented) in small city quarters due to insufficient data (small sample sizes), the city districts 1, 2, 5 and 8 are not broken down into individual quarters, and the following groups of quarters were formed: Fluntern and Hottingen, Hirslanden and Witikon, Alt-Wiedikon and Friesenberg, werd and Langstrasse, and Saatlen and Schwammendingen Mitte.
 
-### Spacial unit: city quarters group
-This spacial unit was formed on the basis of the distinction according to the two property ownerships. See «Spacial units for queries on property ownership».
+### Spatial unit: city quarters group
+This spatial unit was formed on the basis of the distinction according to the two property ownerships. See «Spatial units for queries on property ownership».
 
 ### Median
 The median is the value that devides rental prices into two equal halves, i.e. one half of the rental prices is smaller than the median and the other half is larger.
@@ -38,7 +38,7 @@ The median is the value that devides rental prices into two equal halves, i.e. o
 A quantile specifies how many of the estimated values are lower or equal to the specified quantile limit. Example: The 25% quantile states that 25% are lower or equal to the specified value.
 
 ### Confidence intervals
-The estimated prices are underlaid with the 95% confidence intervals. These denote the range that, given an infinite repetition of a random experiment, includes the true value of the population with a probability of 95%. In the MPE, citywide 95% confidence intervals are approximately 4 percent of the reported median prices and means (absolute width of confidence interval divided by estimated value). For smaller spacial units (e.g. quarters), the uncertainties are higher; the confidence intervals of the reported values are in the range of 4 to 8 percent and may increase to close to 20 percent in some cases.
+The estimated prices are underlaid with the 95% confidence intervals. These denote the range that, given an infinite repetition of a random experiment, includes the true value of the population with a probability of 95%. In the MPE, citywide 95% confidence intervals are approximately 4 percent of the reported median prices and means (absolute width of confidence interval divided by estimated value). For smaller spatial units (e.g. quarters), the uncertainties are higher; the confidence intervals of the reported values are in the range of 4 to 8 percent and may increase to close to 20 percent in some cases.
 
 ## Architecture
 
