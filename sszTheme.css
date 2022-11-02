@@ -1,10 +1,10 @@
 /********************************
- * SSZ Shiny css
- *******************************/
+* SSZ Shiny css
+*******************************/
  
- /*******************************
- * General Settings
- *******************************/
+/*******************************
+* General Settings
+*******************************/
  
 
 /* Ruler */
@@ -42,6 +42,17 @@ h3 {
   font-size: 18px;
   line-height: 25px;
   font-weight: 750;
+}
+
+/* h4 Font */
+h4 {
+  font-family: HelveticaNeueLTW05_85Heavy;
+  color: #4D4D4D;
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 750;
+  margin-bottom: 10px;
+  margin-top: 24px;
 }
 
 /* Paragraph Text */
@@ -93,22 +104,33 @@ a:hover {
     font-size: 14px;
     line-height: 23px;
   }
+  
   ol {
     font-size: 14px;
     line-height: 23px;
   }
+  
   h1 {
     font-size: 20px;
     line-height: 28px;
   }
+  
   h2 {
     font-size: 18px;
     line-height: 25px;
   }
+  
   h3 {
     font-size: 14px;
     line-height: 23px;
   }
+  
+  h4 {
+    font-size: 14px;
+    line-height: 23px;
+    margin-bottom: 5px;
+  }
+  
   hr {
     margin-top: 12px;
     margin-bottom: 16px;
@@ -120,22 +142,33 @@ a:hover {
     font-size: 14px;
     line-height: 23px;
   }
+  
   ol {
     font-size: 14px;
     line-height: 23px;
   }
+  
   h1 {
     font-size: 18px;
     line-height: 25px;
   }
+  
   h2 {
     font-size: 16px;
     line-height: 22px;
   }
+  
   h3 {
     font-size: 14px;
     line-height: 23px;
   }
+  
+  h4 {
+    font-size: 14px;
+    line-height: 23px;
+    margin-bottom: 5px;
+  }
+  
   hr {
     margin-top: 12px;
     margin-bottom: 16px;
@@ -144,23 +177,26 @@ a:hover {
  .bar {
    display: none;
  }
+ 
  .barHeader {
    display: none;
  }
+ 
  .spacer {
    display: none;
  }
+ 
  .spacerHeader {
    display: none;
  }
 }
 
 
- /*******************************
- * Control Labels
- *******************************/
+/*******************************
+* Control Labels
+*******************************/
  
- #ButtonGroupLabel {
+#ButtonGroupLabel {
   margin-top: 10px;
 }
 
@@ -174,6 +210,7 @@ a:hover {
   letter-spacing: 0.01em;
   text-align: left;
 }
+
 #ButtonGroupLabel1-label {
   font-family: HelveticaNeueLTW01_55Roman;
   color: #646464;
@@ -183,6 +220,7 @@ a:hover {
   letter-spacing: 0.01em;
   text-align: left;
 }
+
 #ButtonGroupLabel2-label {
   font-family: HelveticaNeueLTW01_55Roman;
   color: #646464;
@@ -192,6 +230,7 @@ a:hover {
   letter-spacing: 0.01em;
   text-align: left;
 }
+
 #ButtonGroupLabel3-label {
   font-family: HelveticaNeueLTW01_55Roman;
   color: #646464;
@@ -201,6 +240,7 @@ a:hover {
   letter-spacing: 0.01em;
   text-align: left;
 }
+
 #ButtonGroupLabel4-label {
   font-family: HelveticaNeueLTW01_55Roman;
   color: #646464;
@@ -213,20 +253,20 @@ a:hover {
 
 /* Control Label (Select Input) */
 #select-label.control-label {
-    top: 14px;
-    font-family: 'HelveticaNeueLTW01_55Roman';
-    font-weight: 400;
-    color: #646464;
-    font-size: 12px;
-    line-height: 19px;
-    letter-spacing: 0.01em;
-    text-align: left;
-    position: relative;
-    left: 16px;
-    z-index: 10;
-    background-color: white;
-    padding-left: 2px;
-    padding-right: 2px;
+  top: 14px;
+  font-family: 'HelveticaNeueLTW01_55Roman';
+  font-weight: 400;
+  color: #646464;
+  font-size: 12px;
+  line-height: 19px;
+  letter-spacing: 0.01em;
+  text-align: left;
+  position: relative;
+  left: 16px;
+  z-index: 10;
+  background-color: white;
+  padding-left: 2px;
+  padding-right: 2px;
 }
 
 /* General Label*/
@@ -261,26 +301,26 @@ a:hover {
 }
 
 
- /*******************************
- * Context Box
- *******************************/
+/*******************************
+* Context Box
+*******************************/
  
 /* Context Box */
 .well {
-    border-radius: 0px;
-    background-color: transparent;
-    box-shadow: none;
-    border: 0 solid #646464;
-    position: relative;
-    z-index: 0;
-    padding: 0;
-    margin-top: 20px;
+  border-radius: 0px;
+  background-color: transparent;
+  box-shadow: none;
+  border: 0 solid #646464;
+  position: relative;
+  z-index: 0;
+  padding: 0;
+  margin-top: 20px;
 }
 
 
- /*******************************
- * Form Control (Input)
- *******************************/
+/*******************************
+* Form Control (Input)
+*******************************/
 
 .form-group {
   margin-bottom: 0px;
@@ -288,9 +328,9 @@ a:hover {
 }
 
 
- /*******************************
- * Radio Buttons
- *******************************/
+/*******************************
+* Radio Buttons
+*******************************/
 
 /* Radio Buttons Input */
 .radio input[type="radio"]:hover {
@@ -309,10 +349,10 @@ a:hover {
 }
 
 .radio input[type=radio] {
-    margin: 0px 0 0 ;
-    display: inline-grid;
-    margin-left: -1.25em;
-    margin-top: 2px;
+  margin: 0px 0 0 ;
+  display: inline-grid;
+  margin-left: -1.25em;
+  margin-top: 2px;
 }
 
 .radio input[type="radio"] {
@@ -357,29 +397,30 @@ a:hover {
   font-family: HelveticaNeueLTW01_55Roman;
 }
 
- /*******************************
- * Text Input
- *******************************/
+
+/*******************************
+* Text Input
+*******************************/
  
 /* Input */
 .form-control {
-    border-color: #646464;
-    outline: 0;
-    border-radius: 2px;
-    height: 40px;
-    box-shadow: none;
-    font-family: HelveticaNeueLTW01_55Roman;
-    font-size: 14px;
-    line-height: 26px;
-    padding: 6px 16px 6px 16px;
+  border-color: #646464;
+  outline: 0;
+  border-radius: 2px;
+  height: 40px;
+  box-shadow: none;
+  font-family: HelveticaNeueLTW01_55Roman;
+  font-size: 14px;
+  line-height: 26px;
+  padding: 6px 16px 6px 16px;
 }
 
 .form-control:hover {
-    background-color: white;
-    color:  #070250;
-    border-color: #070250;
-    padding: 6px 16px 6px 16px;
-    transition: 0.7s;
+  background-color: white;
+  color:  #070250;
+  border-color: #070250;
+  padding: 6px 16px 6px 16px;
+  transition: 0.7s;
 }
 
 .form-control:focus {
@@ -391,27 +432,27 @@ a:hover {
 }
 
 
- /*******************************
- * Action Buttons
- *******************************/
+/*******************************
+* Action Buttons
+*******************************/
 
 .btn {
-    background-color: #0F05A0;
-    padding: 9px 24px 9px 24px;
-    border-radius: 3px;
-    border: 0 solid;
-    height: 40px;
-    color: white;
-    font-family: HelveticaNeueLTW01_55Roman;
-    font-size: 14px;
-    line-height: 22px;
-    margin-top: 32px;
+  background-color: #0F05A0;
+  padding: 9px 24px 9px 24px;
+  border-radius: 3px;
+  border: 0 solid;
+  height: 40px;
+  color: white;
+  font-family: HelveticaNeueLTW01_55Roman;
+  font-size: 14px;
+  line-height: 22px;
+  margin-top: 32px;
 }
 
 .btn:hover {
-    background-color: #070250;
-    color: white;
-    transition: 0.7s;
+  background-color: #070250;
+  color: white;
+  transition: 0.7s;
 }
 
 .btn:focus {
@@ -434,46 +475,46 @@ a:hover {
 }
 
 button {
-    background-color: #F2F2F2;
-    padding: 4px 12px 4px 12px;
-    border-radius: 30px;
-    border: 0 solid;
-    color: #0F05A0;
-    font-family: HelveticaNeueLTW01_55Roman;
-    font-size: 12px;
-    line-height: 22px;
+  background-color: #F2F2F2;
+  padding: 4px 12px 4px 12px;
+  border-radius: 30px;
+  border: 0 solid;
+  color: #0F05A0;
+  font-family: HelveticaNeueLTW01_55Roman;
+  font-size: 12px;
+  line-height: 22px;
 }
 
 button:hover {
-    background-color: rgba(15, 5, 160, 0.08);
-    color: #070250;
-    transition: 0.7s;
+  background-color: rgba(15, 5, 160, 0.08);
+  color: #070250;
+  transition: 0.7s;
 }
 
 button:active {
-    background-color: #0F05A0;
-    color: white;
-    outline-color: transparent;
-    transition: 0.7s;
+  background-color: #0F05A0;
+  color: white;
+  outline-color: transparent;
+  transition: 0.7s;
 }
 
 
 /*******************************
- * Reactablee
+* Reactablee
 *******************************/
  
- /* Table */
+/* Table */
 .rt-table {
-   font-size: 11px;
-   color: #646464;
-   border: 0px;
- }
+  font-size: 11px;
+  color: #646464;
+  border: 0px;
+}
  
  /* Table Header */
 .rt-thead {
-   color: #0F05A0;
-   font-family: HelveticaNeueLTW05_85Heavy;
- }
+  color: #0F05A0;
+  font-family: HelveticaNeueLTW05_85Heavy;
+}
  
  /* Table Pagination */
 .rt-pagination {
@@ -482,35 +523,35 @@ button:active {
 }
 
 .rt-expander-button:hover {
-    background: none;
-    border: none;
-    cursor: pointer;
-    margin: 0 2px;
-    padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin: 0 2px;
+  padding: 0;
 }
 
 .rt-expander-button:active {
-    background: none;
-    border: none;
-    cursor: pointer;
-    outline-color: transparent;
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline-color: transparent;
 }
 
 .rt-expander-button:focus {
-    background: none;
-    border: none;
-    outline-color: transparent;
+  background: none;
+  border: none;
+  outline-color: transparent;
 }
 
 .rt-page-button:disabled {
-    opacity: 0;
-    cursor: default;
+  opacity: 0;
+  cursor: default;
 }
 
 /* Activate Background-color and pointer on hover */
 .ReactTable .rt-tr:hover .rt-td {
-    background: #F2F2F2;
-    cursor: pointer;
+  background: #F2F2F2;
+  cursor: pointer;
 }
 
 /* Delete row select */
@@ -525,9 +566,9 @@ button:active {
 }
 
 
- /*******************************
- * Select Input
- *******************************/
+/*******************************
+* Select Input
+*******************************/
 
 /* Input */
 .selectize {
@@ -557,9 +598,9 @@ button:active {
 }
 
 .selectize:hover {
-    background-color: #F2F2F2;
-    color: #070250;
-    transition: 0.7s;
+  background-color: #F2F2F2;
+  color: #070250;
+  transition: 0.7s;
 }
 
 .selectize-input.full{
@@ -575,11 +616,11 @@ button:active {
 }
 
 .selectize-input.full:hover {
-    background-color: white;
-    color:  #070250;
-    border-color: #070250;
-    padding: 6px 16px 6px 16px;
-    transition: 0.7s;
+  background-color: white;
+  color:  #070250;
+  border-color: #070250;
+  padding: 6px 16px 6px 16px;
+  transition: 0.7s;
 }
 
 .selectize-input.full:focus {
@@ -591,102 +632,113 @@ button:active {
 }
 
 .selectize-dropdown [data-selectable], .selectize-dropdown .optgroup-header {
-    padding: 9px 20px;
+  padding: 9px 20px;
 }
 
 
- /*******************************
- * Downloads
- *******************************/
+/*******************************
+* Definitions
+*******************************/
+
+.defDiv {
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #F2F2F2;
+}
+
+
+/*******************************
+* Downloads
+*******************************/
  
  /* Donwload Container */
 .downloadWrapperDiv {
-    margin-top: 16px;
- }
+  margin-top: 16px;
+}
  
 #csvDownload {
-    text-decoration: none;
-    border-radius: 50px;
-    background-color: #F2F2F2;
-    padding: 0;
-    height: 24px;
-    width: 50px;
-    font-size: 12px;
-    margin-right: 16px;
-    color: #0F05A0;
-    margin-top: 0;
+  text-decoration: none;
+  border-radius: 50px;
+  background-color: #F2F2F2;
+  padding: 0;
+  height: 24px;
+  width: 50px;
+  font-size: 12px;
+  margin-right: 16px;
+  color: #0F05A0;
+  margin-top: 0;
 }
 
 #csvDownload:hover {
-    text-decoration: none;
-    background-color: rgba(15, 5, 160, 0.08);
-    color: #070250;
-    transition: 0.7s;
- }
+  text-decoration: none;
+  background-color: rgba(15, 5, 160, 0.08);
+  color: #070250;
+  transition: 0.7s;
+}
  
 #csvDownload:active {
-    text-decoration: none;
-    background-color: #0F05A0;
-    color: white;
-    outline-color: transparent;
-    outline-style: solid;
-    transition: 0.7s;
- }
+  text-decoration: none;
+  background-color: #0F05A0;
+  color: white;
+  outline-color: transparent;
+  outline-style: solid;
+  transition: 0.7s;
+}
 
 #excelDownload {
-    text-decoration: none;
-    border-radius: 50px;
-    background-color: #F2F2F2;
-    padding: 0;
-    height: 24px;
-    font-size: 12px;
-    width: 50px;
-    margin-right: 16px;
-    color: #0F05A0;
-    margin-top: 0;
- }
+  text-decoration: none;
+  border-radius: 50px;
+  background-color: #F2F2F2;
+  padding: 0;
+  height: 24px;
+  font-size: 12px;
+  width: 50px;
+  margin-right: 16px;
+  color: #0F05A0;
+  margin-top: 0;
+}
  
 #excelDownload:hover {
-    text-decoration: none;
-    background-color: rgba(15, 5, 160, 0.08);
-    color: #070250;
-    transition: 0.7s;
- }
+  text-decoration: none;
+  background-color: rgba(15, 5, 160, 0.08);
+  color: #070250;
+  transition: 0.7s;
+}
  
 #excelDownload:active {
-     text-decoration: none;
-     background-color: #0F05A0;
-    color: white;
-    outline-color: transparent;
-    outline-style: solid;
-    transition: 0.7s;
- }
+  text-decoration: none;
+  background-color: #0F05A0;
+  color: white;
+  outline-color: transparent;
+  outline-style: solid;
+  transition: 0.7s;
+}
  
 #ogdDown {
-   border-radius: 50px;
-    background-color: #F2F2F2;
-    padding: 0;
-    height: 24px;
-    font-size: 12px;
-    width: 50px;
-    margin-right: 16px;
-    color: #0F05A0;
-    margin-top: 0;
- }
+  border-radius: 50px;
+  background-color: #F2F2F2;
+  padding: 0;
+  height: 24px;
+  font-size: 12px;
+  width: 50px;
+  margin-right: 16px;
+  color: #0F05A0;
+  margin-top: 0;
+}
  
 #ogdDown:hover {
-    background-color: rgba(15, 5, 160, 0.08);
-    color: #070250;
-    transition: 0.7s;
- }
+  background-color: rgba(15, 5, 160, 0.08);
+  color: #070250;
+  transition: 0.7s;
+}
  
 #ogdDown:active {
-    background-color: #0F05A0;
-    color: white;
-    outline-color: transparent;
-    outline-style: solid;
-    transition: 0.7s;
- }
+  background-color: #0F05A0;
+  color: white;
+  outline-color: transparent;
+  outline-style: solid;
+  transition: 0.7s;
+}
  
  
 /*******************************
@@ -696,7 +748,6 @@ button:active {
 .infoDiv {
   margin-bottom: 40px;
 }
- 
  
 
 /*******************************

@@ -25,11 +25,20 @@ The market indicators characterize the type of tenancy. The following five categ
 - Existing rents 11-20 years: Tenancy with duration > 10 and ≤ 20 years.
 - Existing rents over 20 years: Tenancy with duration > 20 years.
 
-### Spatial unit: city quarters
-Because city quarters are too small as spatial unit for a sample survey as the MPE, it is not possible to differentiate rents by non-profit status.
+### Filtering by property ownership
+Since it is not possible to differentiate rents by property developers (profit oriented and non-profit oriented) for small city quarters due to insufficient data (sample size), the city districts 1, 2, 5 and 8 are broken down into the following district groups: Fluntern and Hottingen, Hirslanden and Witikon, Alt-Wiedikon and Friesenberg, Werd and Langstrasse, and Saatlen and Schwammendingen-Mitte.
 
 ### Spacial unit: city quarters group
+This spacial unit was formed based on filtering by property ownership. See the corresponding section.
 
+### Median
+The median is the value that devides rental prices into two equal havles, i.e. one half of the rental prices is smaller than the median and the other half is larger.
+
+### Quantiles
+A quantile specifies how many of the estimated values are lower or equal to the specified quantile limit. Example: The 25% quantile states that 25% are lower or equal to the specified value.
+
+### Confidence intervals
+The estimated prices are underlaid with the 95% confidence intervals. These denote the range that, given an infinite repetition of a random experiment, includes the true value of the population with a probability of 95%. In the MPE, citywide 95% confidence intervals are approximately 4 percent of the reported median prices and means (absolute width of confidence interval divided by estimated value). For smaller spacial units (e.g. quarters), the uncertainties are higher; the confidence intervals of the reported values are in the range of 4 to 8 percent and may increase to close to 20 percent in some cases.
 
 ## Architecture
 
