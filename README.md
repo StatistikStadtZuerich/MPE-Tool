@@ -1,5 +1,5 @@
 # MPE-Tool
-Shiny app for MPE tool (MietPreisErhebung). By using this application you agree to the disclaimer.
+Shiny app for MPE tool (MietPreisErhebung). By using this application you agree to the [disclaimer](https://www.stadt-zuerich.ch/prd/de/index/statistik/publikationen-angebote/datenbanken-anwendungen/mietpreiserhebung/disclaimer.html). You can find the documentation of the methodology [here](https://www.stadt-zuerich.ch/prd/de/index/statistik/publikationen-angebote/publikationen/methodenbericht/Methodenbericht_Mietpreiserhebung.html).
 
 The MPE application on the website of [Statistik Stadt Zürich](https://www.stadt-zuerich.ch/prd/de/index/statistik/publikationen-angebote/datenbanken-anwendungen/mietpreiserhebung.html) shows estimated average rental prices in the city of Zurich (including prices per square meter, median and the respective quantiles) of 2-, 3- and 4-room rental apartments as of the date of April 1, 2022. The estimated rental prices are based on a stratified sample. On the one hand this sample consist of a non-representative ad hoc sample established over several years, which is collected quarterly (net rental prcies for 50,572 apartments). On the other hand, it consists of a one-time random sample of all remaining rental apartments, which guarantees the necessary representativeness (net rental prices for 5236 apartments).
 
