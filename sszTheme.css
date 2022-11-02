@@ -44,17 +44,6 @@ h3 {
   font-weight: 750;
 }
 
-/* h4 Font */
-h4 {
-  font-family: HelveticaNeueLTW05_85Heavy;
-  color: #4D4D4D;
-  font-size: 16px;
-  line-height: 22px;
-  font-weight: 750;
-  margin-bottom: 10px;
-  margin-top: 24px;
-}
-
 /* Paragraph Text */
 p {
   font-style: normal;
@@ -125,12 +114,6 @@ a:hover {
     line-height: 23px;
   }
   
-  h4 {
-    font-size: 14px;
-    line-height: 23px;
-    margin-bottom: 5px;
-  }
-  
   hr {
     margin-top: 12px;
     margin-bottom: 16px;
@@ -161,12 +144,6 @@ a:hover {
   h3 {
     font-size: 14px;
     line-height: 23px;
-  }
-  
-  h4 {
-    font-size: 14px;
-    line-height: 23px;
-    margin-bottom: 5px;
   }
   
   hr {
@@ -633,17 +610,6 @@ button:active {
 
 .selectize-dropdown [data-selectable], .selectize-dropdown .optgroup-header {
   padding: 9px 20px;
-}
-
-
-/*******************************
-* Definitions
-*******************************/
-
-.defDiv {
-  margin-top: 40px;
-  padding: 20px;
-  background-color: #F2F2F2;
 }
 
 
