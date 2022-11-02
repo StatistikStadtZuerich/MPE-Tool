@@ -175,8 +175,22 @@ if(is.null(data)) {
                 ),
             
                 # Example Table Output 
-                reactableOutput("table")
-               
+                reactableOutput("table"),
+                
+                conditionalPanel(
+                    condition = 'input.ActionButtonId>0',
+                    tags$div(
+                        class = "defDiv",
+                        h2("Erklärungen"),
+                        hr(),
+                        h4("Median"),
+                        p("Der Median ist der Wert, der die Mietpreise in zwei gleich grosse Hälften teilt, d.h. die eine Hälfte der Mietpreise kleiner als der Median, die andere Hälfte grösser."),
+                        h4("Quantil"),
+                        p("Ein Quantil legt fest, wie viele der geschätzten Werte tiefer oder gleich der bestimmten Quantil-Grenze sind. Beispiel: Das 25%-Quantil sagt aus, dass 25% tiefer oder gleich dem angegebenen Wert sind."),
+                        h4("Konfidenzintervall"),
+                        p("Konfidenzintervall: Die geschätzten Preise sind mit 95-%-Konfidenzintervallen unterlegt. Diese bezeichnen den Bereich, der bei unendlicher Wiederholung eines Zufallsexperiments mit einer Wahrscheinlichkeit von 95 Prozent den wahren Wert der Grundgesamtheit einschliesst. In der MPE liegen die 95-%-Konfidenzintervalle gesamtstädtisch ungefähr bei 4 Prozent der ausgewiesenen Medianpreise und Mittelwerte (absolute Breite des Konfidenzintervalls geteilt durch Schätzwert). Bei kleineren Raumeinheiten (z.B. Quartiere) sind die Unsicherheiten höher; die Konfidenzintervalle der ausgewiesenen Werte liegen im Bereich von 4 bis 8 Prozent und können unter Umständen bis gegen 20 Prozent steigen.")
+                    )
+                )
             )
         )
     )
@@ -292,7 +306,7 @@ if(is.null(data)) {
                                               minWidth = 50,
                                               sortable = FALSE),
                                           WertNum = colDef(
-                                              name = "Median\n(CHF/Monat)",
+                                              name = "Median",
                                               align = "right",
                                               minWidth = 50),
                                           WertNum2 = colDef(
