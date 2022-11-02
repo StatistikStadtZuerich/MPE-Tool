@@ -33,7 +33,7 @@ tryCatch(                       # Applying tryCatch
   expr = {                      # Specifying expression
 
     # URL
-    URL <- c("https://gist.githubusercontent.com/DonGoginho/2ea874a3e8c36457635bbb0f6eedaed3/raw/d9060f682bc773b06fbb07ac16f2788d6a7247f2")
+    URL <- c("https://data.stadt-zuerich.ch/dataset/bau_whg_mpe_mietpreis_raum_zizahl_gn_jahr_od5161/download/BAU516OD5161.csv")
     
     # Download
     dataDownload <- function(link) {
