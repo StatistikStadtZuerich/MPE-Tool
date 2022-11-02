@@ -25,11 +25,11 @@ The market indicators characterize the type of tenancy. The following five categ
 - Existing rents 11-20 years: Tenancy with duration > 10 and ≤ 20 years.
 - Existing rents over 20 years: Tenancy with duration > 20 years.
 
-### spatial units for queries on property owneship
+### Spatial units for queries on property owneship
 Since it is not possible to differentiate rents by property ownership (profit oriented and non-profit oriented) in small city quarters due to insufficient data (small sample sizes), the city districts 1, 2, 5 and 8 are not broken down into individual quarters, and the following groups of quarters were formed: Fluntern and Hottingen, Hirslanden and Witikon, Alt-Wiedikon and Friesenberg, werd and Langstrasse, and Saatlen and Schwammendingen Mitte.
 
-### spatial unit: city quarters group
-This spatial unit was formed on the basis of the distinction according to the two property ownerships. See «spatial units for queries on property ownership».
+### Spatial unit: city quarters group
+This spatial unit was formed on the basis of the distinction according to the two property ownerships. See «Spatial units for queries on property ownership».
 
 ### Median
 The median is the value that devides rental prices into two equal halves, i.e. one half of the rental prices is smaller than the median and the other half is larger.
