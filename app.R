@@ -3,9 +3,7 @@ library(shiny)
 library(tidyverse)
 library(reactable)
 library(lubridate)
-library(xlsx)
 library(jpeg)
-library(imager)
 library(openxlsx)
 library(readxl)
 library(httr)
@@ -22,7 +20,7 @@ source("prepareData.R", encoding = "UTF-8")
 # Source Export Excel
 source("exportExcel.R", encoding = "UTF-8")
 
-# if data load didn't work show message
+# if data load didn't work shzow message
 if(is.null(data)) {
     
     # Define UI
