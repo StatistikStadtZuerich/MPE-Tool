@@ -7,7 +7,6 @@ library(jpeg)
 library(openxlsx)
 library(readxl)
 library(httr)
-library(parallel)
 library(data.table)
 
 
@@ -15,7 +14,8 @@ library(data.table)
 source("R/sszDownload.R", encoding = "UTF-8")
 
 # Source Data Load
-source("R/prepareData.R", encoding = "UTF-8")
+source("R/get_data.R", encoding = "UTF-8")
+data <- get_data()
 
 # Source Export Excel
 source("R/ssz_download_excel.R", encoding = "UTF-8")
