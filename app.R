@@ -83,21 +83,21 @@ if(is.null(data)) {
         sszRadioButtons(inputId = "radio_anz_zi",
                      label = "Anzahl Zimmer:",
                      choices = unique(data$ZimmerLang),
-                     selected = "3 Zimmer" # default value
+                     selected = unique(data$ZimmerLang)[[2]] # default value
         ),
         
         # Preis pro Wohnung oder pro Quadratmeter
         sszRadioButtons(inputId = "radio_whg_qm",
                      label = "Ebene Mietpreis:",
                      choices = unique(data$EinheitLang),
-                     selected = "Mietpreis pro Quadratmeter" # default value
+                     selected = unique(data$EinheitLang)[[1]] # default value
         ),
         
         # Netto oder Bruttopreise
         sszRadioButtons(inputId = "radio_net_gross",
                      label = "Art der Miete:",
                      choices = unique(data$PreisartLang),
-                     selected = "Nettomiete" # default value
+                     selected = unique(data$PreisartLang)[[1]] # default value
         ),
         
         # Action Button (disappears after first click)
@@ -116,13 +116,13 @@ if(is.null(data)) {
           tags$div(
             id = "downloadWrapperId",
             class = "downloadWrapperDiv",
-            sszDownload("csvDownload",
+            sszDownload("csv_download",
                         label = "csv"
             ),
-            sszDownload("excelDownload",
+            sszDownload("excel_download",
                         label = "xlsx"
             ),
-            sszOgdDownload(inputId = "ogdDown",
+            sszOgdDownload(inputId = "ogd_download",
                            label = "OGD",
                            onclick = "window.open('https://data.stadt-zuerich.ch/dataset/bau_whg_mpe_mietpreis_raum_zizahl_gn_jahr_od5161', '_blank')"
             )
@@ -166,63 +166,67 @@ if(is.null(data)) {
     })
     
     # Filter data according to inputs
-    filteredData <- reactive({
+    filtered_data <- reactive({
       req(global$activeButton == TRUE)
       
       if(input$select_raum == "Quartiere") {
-        filtered <- data %>%
-          filter(RaumeinheitLang == input$select_raum) %>% 
-          filter(ZimmerLang == input$radio_anz_zi) %>% 
-          filter(EinheitLang == input$radio_whg_qm) %>% 
-          filter(PreisartLang == input$radio_net_gross) 
-        filtered
+        filtered1 <- data
       } else {
-        filtered <- data %>%
-          filter(RaumeinheitLang == input$select_raum) %>% 
-          filter(GemeinnuetzigLang == input$radio_gemeinnue_alle) %>% 
-          filter(ZimmerLang == input$radio_anz_zi) %>% 
-          filter(EinheitLang == input$radio_whg_qm) %>% 
-          filter(PreisartLang == input$radio_net_gross) 
-        filtered
+        filtered1 <- data %>%
+          filter(GemeinnuetzigLang == input$radio_gemeinnue_alle) 
       }
+      
+      filtered1 %>% 
+        filter(RaumeinheitLang == input$select_raum) %>% 
+        filter(ZimmerLang == input$radio_anz_zi) %>% 
+        filter(EinheitLang == input$radio_whg_qm) %>% 
+        filter(PreisartLang == input$radio_net_gross)
     })
     
     output$table <- renderReactable({
       
       # Prepare df
-      data_mietobjekt <- filteredData() %>% 
+      data_mietobjekt <- filtered_data() %>% 
         mutate(WertNum2 = as.numeric(qu50)) %>%
         mutate(WertNum = as.numeric(qu50)) %>% 
         select(GliederungLang, WertNum, WertNum2, ci50) 
 
-      table_output <- create_reactable(filteredData(), data_mietobjekt)
+      table_output <- create_reactable(filtered_data(), data_mietobjekt)
     })
     
-    filteredData_excel <- reactive({
+    filtered_data_excel <- reactive({
       
-      filter_data_for_excel(filteredData())
+      filter_data_for_excel(filtered_data())
       
     })
     
     
     # Render data download
     # CSV
-    output$csvDownload <- downloadHandler(
+    output$csv_download <- downloadHandler(
       filename = function() {
         paste("MPE-", Sys.Date(), ".csv", sep="")
       },
       content = function(file) {
-        write.csv(filteredData(), file, fileEncoding = "UTF-8")
+        write.csv(filtered_data(), file, fileEncoding = "UTF-8")
       }
     )
     
     # Excel
-    output$excelDownload <- downloadHandler(
+    output$excel_download <- downloadHandler(
       filename = function() {
         paste("MPE-", Sys.Date(), ".xlsx", sep="")
       },
       content = function(file) {
-        sss_download_excel(filteredData_excel(), file, input$select_raum, input$radio_gemeinnue_alle, input$radio_anz_zi, input$radio_whg_qm, input$radio_net_gross)
+        sss_download_excel(
+          filtered_data_excel(), 
+          file, 
+          input$select_raum, 
+          input$radio_gemeinnue_alle, 
+          input$radio_anz_zi, 
+          input$radio_whg_qm, 
+          input$radio_net_gross
+          )
       }
     )
   }
