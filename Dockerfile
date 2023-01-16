@@ -1,5 +1,6 @@
 FROM rocker/tidyverse:4.2.1
-RUN install2.r rsconnect shiny reactable jpeg httr data.table Rcpp openxlsx
+RUN install2.r rsconnect shiny reactable lubridate jpeg httr data.table Rcpp openxlsx readxl remotes
+RUN Rscript -e "remotes::install_github('StatistikStadtZuerich/zuericssstyle')"
 WORKDIR /home/mpe-test
 COPY app.R app.R
 COPY R/ssz_download_excel.R R/ssz_download_excel.R
