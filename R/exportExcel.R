@@ -1,8 +1,8 @@
 sszDownloadExcel <- function(filteredData, file, selctedArea, selctedWhg, selectedRoom, selectedLevel, selectedRent){
     
     # Data Paths
-    hauptPfad <- "Titelblatt.xlsx"
-    imagePfad <- "logo_stzh_stat_sw_pos_1.png"
+    hauptPfad <- "www/Titelblatt.xlsx"
+    imagePfad <- "www/logo_stzh_stat_sw_pos_1.png"
     
     # Read Data
     data <- read_excel(hauptPfad, sheet = 1)

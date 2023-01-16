@@ -12,13 +12,13 @@ library(data.table)
 
 
 # Source Donwload Function
-source("sszDownload.R", encoding = "UTF-8")
+source("R/sszDownload.R", encoding = "UTF-8")
 
 # Source Data Load
-source("prepareData.R", encoding = "UTF-8")
+source("R/prepareData.R", encoding = "UTF-8")
 
 # Source Export Excel
-source("exportExcel.R", encoding = "UTF-8")
+source("R/exportExcel.R", encoding = "UTF-8")
 
 # if data load didn't work shzow message
 if(is.null(data)) {
@@ -27,7 +27,7 @@ if(is.null(data)) {
     ui <- fluidPage(
         
         # Include CSS
-        includeCSS("sszTheme.css"),
+        includeCSS("www/sszTheme.css"),
         
         h1("Fehler"),
         p("Aufgrund momentaner Wartungsarbeiten ist die Applikation zur Zeit nicht verfügbar.")
@@ -44,7 +44,7 @@ if(is.null(data)) {
     ui <- fluidPage(
         
         # Include CSS
-        includeCSS("sszTheme.css"),
+        includeCSS("www/sszTheme.css"),
         
         # Application Title 
         #titlePanel("MPE App"),
