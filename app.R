@@ -18,7 +18,7 @@ source("R/sszDownload.R", encoding = "UTF-8")
 source("R/prepareData.R", encoding = "UTF-8")
 
 # Source Export Excel
-source("R/exportExcel.R", encoding = "UTF-8")
+source("R/ssz_download_excel.R", encoding = "UTF-8")
 
 # if data load didn't work shzow message
 if(is.null(data)) {
@@ -408,7 +408,7 @@ if(is.null(data)) {
                 paste("MPE-", Sys.Date(), ".xlsx", sep="")
             },
             content = function(file) {
-                sszDownloadExcel(filteredData_excel(), file, input$select, input$ButtonGroupLabel, input$ButtonGroupLabel2, input$ButtonGroupLabel3, input$ButtonGroupLabel4)
+              sss_download_excel(filteredData_excel(), file, input$select, input$ButtonGroupLabel, input$ButtonGroupLabel2, input$ButtonGroupLabel3, input$ButtonGroupLabel4)
             }
         )
     }
