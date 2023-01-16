@@ -11,11 +11,14 @@ library(data.table)
 library(zuericssstyle)
 
 # Source Data Load
-source("R/get_data.R", encoding = "UTF-8")
+source("R/get_data.R")
 data <- get_data()
 
 # Source Export Excel
-source("R/ssz_download_excel.R", encoding = "UTF-8")
+source("R/ssz_download_excel.R")
+
+# source function to create main output table
+source("R/create_reactable.R")
 
 # if data load didn't work show message
 if(is.null(data)) {
@@ -181,147 +184,15 @@ if(is.null(data)) {
       }
     })
     
-    
     output$table <- renderReactable({
       
-      # Render a bar chart with a label on the left
-      bar_chart <- function(width = "100%", height = "2rem", fill = "#00bfc4", background = NULL) {
-        bar <- div(style = list(background = fill, width = width, height = height))
-        chart <- div(style = list(flexGrow = 1, marginLeft = "1.0rem", background = background), bar)
-        div(style = list(display = "flex"), chart)
-      }
-      
       # Prepare df
-      if(input$radio_whg_qm == "Mietpreis pro Quadratmeter"){
-        data_mietobjekt <- filteredData() %>% 
-          mutate(WertNum2 = as.numeric(qu50)) %>%
-          mutate(WertNum = as.numeric(qu50)) %>% 
-          select(GliederungLang, WertNum, WertNum2, ci50) 
-      }else{
-        data_mietobjekt <- filteredData() %>% 
-          mutate(WertNum2 = as.numeric(qu50)) %>%
-          mutate(WertNum = as.integer(qu50)) %>% 
-          select(GliederungLang, WertNum, WertNum2, ci50)
-      }
-      
-      
-      data_detail <- filteredData() %>% 
-        dplyr::select(GliederungLang, starts_with("qu"), mean, starts_with("ci")) %>%
-        gather(key, value, -GliederungLang) %>% 
-        mutate(Art = case_when(
-          startsWith(key, "qu") ~ "Wert",
-          startsWith(key, "mean") ~ "Wert",
-          startsWith(key, "ci") ~ "Konfidenzintervall"
-        )) %>% 
-        mutate(Lagemass = case_when(
-          key == "qu10" ~ "10. Perzentil",
-          key == "qu25" ~ "25. Perzentil",
-          key == "qu50" ~ "Median",
-          key == "qu75" ~ "75. Perzentil",
-          key == "qu10" ~ "90. Perzentil",
-          key == "qu90" ~ "90. Perzentil",
-          key == "ci10" ~ "10. Perzentil",
-          key == "ci25" ~ "25. Perzentil",
-          key == "ci50" ~ "Median",
-          key == "ci75" ~ "75. Perzentil",
-          key == "ci90" ~ "90. Perzentil",
-          key == "mean" ~ "Durchschnitt",
-          key == "cimean" ~ "Durchschnitt"
-        )) %>% 
-        select(-key) %>%
-        spread(Art, value) %>%
-        mutate(Lagemass = fct_relevel(Lagemass, c("10. Perzentil", "25. Perzentil", "Median", "75. Perzentil", "90. Perzentil", "Durchschnitt"))) %>% 
-        arrange(Lagemass) %>% 
-        mutate(WertNum = as.numeric(Wert),
-               Spacer = NA) %>% 
-        select(GliederungLang, Lagemass, Wert, Spacer, Konfidenzintervall)
-      
-      tableOutput2 <- reactable(data_mietobjekt,
-                                paginationType = "simple",
-                                language = reactableLang(
-                                  noData = "Keine Einträge gefunden",
-                                  pageNumbers = "{page} von {pages}",
-                                  pageInfo = "{rowStart} bis {rowEnd} von {rows} Einträgen",
-                                  pagePrevious = "\u276e",
-                                  pageNext = "\u276f",
-                                  pagePreviousLabel = "Vorherige Seite",
-                                  pageNextLabel = "Nächste Seite"
-                                ),
-                                theme = reactableTheme(
-                                  borderColor = "#DEDEDE"
-                                ),
-                                outlined = TRUE,
-                                highlight = TRUE,
-                                columns = list(
-                                  GliederungLang = colDef(
-                                    name = "Gliederung",
-                                    minWidth = 50,
-                                    sortable = FALSE),
-                                  WertNum = colDef(
-                                    name = "Median",
-                                    align = "right",
-                                    minWidth = 50),
-                                  WertNum2 = colDef(
-                                    name = "",
-                                    align = "left",
-                                    cell = function(value) {
-                                      width <- paste0(value / max(data_mietobjekt$WertNum2) * 100, "%")
-                                      bar_chart(width = width, fill = "#3e46dd")
-                                    },
-                                    class = "bar",
-                                    headerClass = "barHeader"),
-                                  ci50 = colDef(
-                                    name = "Konfidenzintervall",
-                                    align = "left",
-                                    sortable = FALSE
-                                  )),
-                                details = function(index) {
-                                  det <- filter(data_detail, GliederungLang == data_mietobjekt$GliederungLang[index]) %>% select(-GliederungLang)
-                                  htmltools::div(
-                                    class = "Details",
-                                    reactable(det, 
-                                              class = "innerTable",
-                                              outlined = TRUE,
-                                              fullWidth = TRUE,
-                                              borderless = TRUE,
-                                              theme = reactableTheme(
-                                                borderColor = "#DEDEDE"
-                                              ),
-                                              columns = list(
-                                                Lagemass = colDef(
-                                                  name = "Lagemass",
-                                                  align = "left",
-                                                  minWidth = 50,
-                                                  sortable = FALSE
-                                                ),
-                                                Wert = colDef(
-                                                  name = "Wert",
-                                                  align = "right",
-                                                  minWidth = 50,
-                                                  sortable = FALSE
-                                                ),
-                                                Spacer = colDef(
-                                                  name = "",
-                                                  align = "left",
-                                                  minWidth = 100,
-                                                  sortable = FALSE,
-                                                  class = "spacer",
-                                                  headerClass = "spacerHeader"),
-                                                Konfidenzintervall = colDef(
-                                                  name = "Konfidenzintervall",
-                                                  minWidth = 100,
-                                                  sortable = FALSE
-                                                )
-                                                
-                                              )
-                                              
-                                    )
-                                  )
-                                },
-                                onClick = "expand",
-                                defaultPageSize = 15
-      )
-      tableOutput2
+      data_mietobjekt <- filteredData() %>% 
+        mutate(WertNum2 = as.numeric(qu50)) %>%
+        mutate(WertNum = as.numeric(qu50)) %>% 
+        select(GliederungLang, WertNum, WertNum2, ci50) 
+
+      table_output <- create_reactable(filteredData(), data_mietobjekt)
     })
     
     filteredData_excel <- reactive({
