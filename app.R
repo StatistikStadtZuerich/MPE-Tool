@@ -33,7 +33,8 @@ if(is.null(data)) {
     includeCSS("www/sszThemeShiny.css"),
     
     h1("Fehler"),
-    p("Aufgrund momentaner Wartungsarbeiten ist die Applikation zur Zeit nicht verfügbar.")
+    p(paste0("Aufgrund momentaner Wartungsarbeiten ist die Applikation ",
+             "zur Zeit nicht verfügbar."))
   )
   
   # Server function
@@ -124,7 +125,10 @@ if(is.null(data)) {
             ),
             sszOgdDownload(inputId = "ogd_download",
                            label = "OGD",
-                           onclick = "window.open('https://data.stadt-zuerich.ch/dataset/bau_whg_mpe_mietpreis_raum_zizahl_gn_jahr_od5161', '_blank')"
+                           onclick = paste0(
+                             "window.open('https://data.stadt-zuerich.ch", 
+                             "/dataset/bau_whg_mpe_mietpreis_raum_zizahl_", 
+                             "gn_jahr_od5161', '_blank')")
             )
           )
         )
@@ -143,7 +147,9 @@ if(is.null(data)) {
           # Define subtitle
           tags$div(
             class = "infoDiv",
-            p("Für Detailinformationen zur Verteilung der geschätzten Mietpreise wählen Sie eine Zeile aus (alle Angaben in CHF/Monat).")
+            p(paste0("Für Detailinformationen zur Verteilung der geschätzten ", 
+                     "Mietpreise wählen Sie eine Zeile aus (alle Angaben in ", 
+                     "CHF/Monat)."))
           )
         ),
         
@@ -215,10 +221,10 @@ if(is.null(data)) {
     # Excel
     output$excel_download <- downloadHandler(
       filename = function() {
-        paste("MPE-", Sys.Date(), ".xlsx", sep="")
+        paste("MPE-", Sys.Date(), ".xlsx", sep = "")
       },
       content = function(file) {
-        sss_download_excel(
+        ssz_download_excel(
           filtered_data_excel(), 
           file, 
           input$select_raum, 

@@ -1,4 +1,4 @@
-#' sss_download_excel
+#' ssz_download_excel
 #' 
 #' @description function to create and save the selected/filtered data to an ssz-styled excel sheet
 #'
@@ -9,7 +9,7 @@
 #' @param selected_room 
 #' @param selected_level 
 #' @param selected_rent 
-sss_download_excel <- function(filtered_data, 
+ssz_download_excel <- function(filtered_data, 
                                file, 
                                selected_area, 
                                selected_whg, 
