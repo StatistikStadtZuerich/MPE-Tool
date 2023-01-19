@@ -9,6 +9,10 @@ library(readxl)
 library(httr)
 library(data.table)
 library(zuericssstyle)
+library(icons)
+
+# Set the Icon path
+ssz_icons <- icon_set("www/icons/")
 
 # Source Data Load
 source("R/get_data.R")
@@ -117,18 +121,20 @@ if(is.null(data)) {
           tags$div(
             id = "downloadWrapperId",
             class = "downloadWrapperDiv",
-            sszDownload("csv_download",
-                        label = "csv"
+            sszDownloadButton("csv_download",
+                        label = "csv",
+                        image = img(ssz_icons$download)
             ),
-            sszDownload("excel_download",
-                        label = "xlsx"
+            sszDownloadButton("excel_download",
+                        label = "xlsx",
+                        image = img(ssz_icons$download)
             ),
-            sszOgdDownload(inputId = "ogd_download",
+            sszOgdDownload(outputId = "ogd_download",
                            label = "OGD",
-                           onclick = paste0(
-                             "window.open('https://data.stadt-zuerich.ch", 
-                             "/dataset/bau_whg_mpe_mietpreis_raum_zizahl_", 
-                             "gn_jahr_od5161', '_blank')")
+                           href = paste0(
+                             "https://data.stadt-zuerich.ch/dataset/", 
+                             "bau_whg_mpe_mietpreis_raum_zizahl_gn_jahr_od5161"),
+                           image = img(ssz_icons("external-link"))
             )
           )
         )
@@ -145,12 +151,9 @@ if(is.null(data)) {
           h1("Die untenstehenden Mietpreise entsprechen Ihren Suchkriterien"),
           hr(),
           # Define subtitle
-          tags$div(
-            class = "infoDiv",
-            p(paste0("Für Detailinformationen zur Verteilung der geschätzten ", 
+          p(paste0("Für Detailinformationen zur Verteilung der geschätzten ", 
                      "Mietpreise wählen Sie eine Zeile aus (alle Angaben in ", 
                      "CHF/Monat)."))
-          )
         ),
         
         # Example Table Output 

@@ -229,7 +229,7 @@ a:hover {
 /* Color the Label on input hover */
 .form-group:hover .ssz-label {
   color: #070250;
-  transition: 0.7s;
+  transition: 0.5s;
 }
 
 
@@ -257,7 +257,7 @@ a:hover {
 
 .radio:hover span {
   color: #070250;
-  transition: 0.7s;
+  transition: 0.5s;
 }
 
 .radio input[type="radio"]:checked+span {
@@ -349,7 +349,7 @@ a:hover {
   color:  #070250;
   border-color: #070250;
   padding: 6px 16px 6px 16px;
-  transition: 0.7s;
+  transition: 0.5s;
 }
 
 .form-control:focus {
@@ -357,7 +357,7 @@ a:hover {
   box-shadow: none;
   border-color: #070250;
   padding: 6px 16px 6px 16px;
-  transition: 0.7s;
+  transition: 0.5s;
 }
 
 
@@ -411,7 +411,7 @@ a:hover {
 .btn:hover {
   background-color: #070250;
   color: white;
-  transition: 0.7s;
+  transition: 0.5s;
 }
 
 .btn:focus {
@@ -435,14 +435,14 @@ button {
 button:hover {
   background-color: rgba(15, 5, 160, 0.08);
   color: #070250;
-  transition: 0.7s;
+  transition: 0.5s;
 }
 
 button:active {
   background-color: #0F05A0;
   color: white;
   outline-color: transparent;
-  transition: 0.7s;
+  transition: 0.5s;
 }
 
 /* SSZ Button */
@@ -455,7 +455,7 @@ button:active {
   outline-style: solid;
   background-color: #070250;
   color: white;
-  transition: 0.7s;
+  transition: 0.5s;
 }
 
 .sszActionButton:focus {
@@ -463,7 +463,7 @@ button:active {
   outline-style: solid;
   background-color: #070250;
   color: white;
-  transition: 0.7s;
+  transition: 0.5s;
 }
 
 /* Button no Outline on Click */
@@ -651,7 +651,7 @@ button:active {
 .datepicker .datepicker-switch:hover {
   color: #070250;
   background: transparent;
-  transition: 0.7s;
+  transition: 0.5s;
 }
 
 /* Active Day, Month, Year  */
@@ -817,7 +817,7 @@ button:active {
 .selectize:hover {
   background-color: #F2F2F2;
   color: #070250;
-  transition: 0.7s;
+  transition: 0.5s;
 }
 
 .selectize-input.full{
@@ -837,7 +837,7 @@ button:active {
   color:  #070250;
   border-color: #070250;
   padding: 6px 16px 6px 16px;
-  transition: 0.7s;
+  transition: 0.5s;
 }
 
 .selectize-input.full:focus {
@@ -845,7 +845,7 @@ button:active {
   box-shadow: none;
   border-color: #070250;
   padding: 6px 16px 6px 16px;
-  transition: 0.7s;
+  transition: 0.5s;
 }
 
 .selectize-dropdown [data-selectable], .selectize-dropdown .optgroup-header {
@@ -859,39 +859,49 @@ button:active {
 
 /* Donwload Container */
 .downloadWrapperDiv {
-    margin-top: 16px;
+  margin-top: 16px;
+  max-width: 188px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
  }
 
-/* SSZ Download */
+/* General Button Styling */
 .sszDownload {
-    text-decoration: none;
-    border-radius: 50px;
-    background-color: #F2F2F2;
-    padding: 0;
-    height: 24px;
-    width: 50px;
-    font-size: 12px;
-    margin-right: 16px;
+    text-decoration:none;
+    background-color: white;
+    border-radius: 3px;
+    border: 1px solid #7974C2;
     color: #0F05A0;
-    margin-top: 0;
+    font-family: HelveticaNeueLTW01_55Roman;
+    font-size: 14px;
+    line-height: 22px;
+    padding: 2px 6px 2px 6px;
+    text-align: center;
+    stroke: #0F05A0;
 }
 
+/* Button Hover */
 .sszDownload:hover {
-    text-decoration: none;
-    background-color: rgba(15, 5, 160, 0.08);
-    color: #070250;
-    transition: 0.7s;
- }
-
-.sszDownload:active {
-    text-decoration: none;
-    background-color: #0F05A0;
+    text-decoration:none;
+    background-color: #070250;
+    border: 1px solid #070250;
     color: white;
-    outline-color: transparent;
-    outline-style: solid;
-    transition: 0.7s;
- }
+    transition: 0.5s;
+}
 
+.sszDownload:focus, .sszDownload:active {
+  text-decoration:none;
+}
+
+.sszDownload path {
+  stroke: #0F05A0;
+}
+
+.sszDownload:hover path {
+  stroke: white;
+  transition: 0.5s;
+}
 
 /*******************************
 * Info Div
