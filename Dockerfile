@@ -10,6 +10,7 @@ COPY R/filter_data_for_excel.R R/filter_data_for_excel.R
 COPY R/get_data.R R/get_data.R
 COPY www/logo_stzh_stat_sw_pos_1.png www/logo_stzh_stat_sw_pos_1.png
 COPY www/sszThemeShiny.css www/sszThemeShiny.css
+COPY www/MPETheme.css www/MPETheme.css
 COPY www/Titelblatt.xlsx www/Titelblatt.xlsx
 COPY www/icons/download.svg www/icons/download.svg
 COPY www/icons/external-link.svg www/icons/external-link.svg
