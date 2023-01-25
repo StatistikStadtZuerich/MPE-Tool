@@ -226,13 +226,6 @@ a:hover {
   margin-top: -10px;
 }
 
-/* Color the Label on input hover */
-.form-group:hover .ssz-label {
-  color: #070250;
-  transition: 0.5s;
-}
-
-
 /*******************************
 * Radio Buttons
 *******************************/
@@ -812,6 +805,7 @@ button:active {
 .selectize-dropdown-content {
   background: white;
   color: #646464;
+  font-family: HelveticaNeueLTW01_55Roman;
 }
 
 .selectize:hover {
