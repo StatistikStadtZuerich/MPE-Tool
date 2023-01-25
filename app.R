@@ -54,13 +54,14 @@ if (is.null(data)) {
     
     # Include CSS
     includeCSS("www/sszThemeShiny.css"),
+    includeCSS("www/MPETheme.css"),
     
     # Sidebar: Input widgets are placed here
     sidebarLayout(
       sidebarPanel(
         
         # dropdown for selecting "raum": stadt/kreis/quartiergruppen/quartier
-        sszSelectInput("select_raum", "Geografischer Raum:", 
+        sszSelectInput("select_raum", "Geografischer Raum", 
                        choices = unique(data$RaumeinheitLang),
                        selected = "Ganze Stadt"),
         
@@ -69,7 +70,7 @@ if (is.null(data)) {
           
           # radio button Wohnungstyp (ALLE/gemeinnuetzig/nicht gemeinnuetzig)
           sszRadioButtons(inputId = "radio_gemeinnue_alle",
-                       label = "Typ der Wohnung:",
+                       label = "Typ der Wohnung",
                        choices = unique(data$GemeinnuetzigLang)
           )
         ),
@@ -79,7 +80,7 @@ if (is.null(data)) {
           
           # radio button gemeinnuetzig oder nicht
           sszRadioButtons(inputId = "radio_gemeinnue",
-                       label = "Typ der Wohnung:",
+                       label = "Typ der Wohnung",
                        choices = "Alle Wohnungen",
                        selected = "Alle Wohnungen" # default value
           )
@@ -87,21 +88,21 @@ if (is.null(data)) {
         
         # radio button Anzahl Zimmer
         sszRadioButtons(inputId = "radio_anz_zi",
-                     label = "Anzahl Zimmer:",
+                     label = "Anzahl Zimmer",
                      choices = unique(data$ZimmerLang),
                      selected = unique(data$ZimmerLang)[[2]] # default value
         ),
         
         # Preis pro Wohnung oder pro Quadratmeter
         sszRadioButtons(inputId = "radio_whg_qm",
-                     label = "Ebene Mietpreis:",
+                     label = "Ebene Mietpreis",
                      choices = unique(data$EinheitLang),
                      selected = unique(data$EinheitLang)[[1]] # default value
         ),
         
         # Netto oder Bruttopreise
         sszRadioButtons(inputId = "radio_net_gross",
-                     label = "Art der Miete:",
+                     label = "Art der Miete",
                      choices = unique(data$PreisartLang),
                      selected = unique(data$PreisartLang)[[1]] # default value
         ),
