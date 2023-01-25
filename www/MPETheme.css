@@ -1,0 +1,14 @@
+/********************************
+* SSZ MPE css
+*******************************/
+
+/* Second Detail Table */
+.Details {
+  padding-left: 45px;
+  border-top: 1px solid #DEDEDE;
+}
+
+/* Paragraph Text extra top margin */
+p {
+  margin: 0 0 40px;
+}
