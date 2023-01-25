@@ -28,13 +28,14 @@ source("R/create_reactable.R")
 source("R/filter_data_for_excel.R")
 
 # if data load didn't work show message
-if(is.null(data)) {
+if (is.null(data)) {
   
   # Define UI
   ui <- fluidPage(
     
     # Include CSS
     includeCSS("www/sszThemeShiny.css"),
+    includeCSS("www/MPETheme.css"),
     
     h1("Fehler"),
     p(paste0("Aufgrund momentaner Wartungsarbeiten ist die Applikation ",
@@ -178,7 +179,7 @@ if(is.null(data)) {
     filtered_data <- reactive({
       req(global$activeButton == TRUE)
       
-      if(input$select_raum == "Quartiere") {
+      if (input$select_raum == "Quartiere") {
         filtered1 <- data
       } else {
         filtered1 <- data %>%
@@ -214,7 +215,7 @@ if(is.null(data)) {
     # CSV
     output$csv_download <- downloadHandler(
       filename = function() {
-        paste("MPE-", Sys.Date(), ".csv", sep="")
+        paste("MPE-", Sys.Date(), ".csv", sep = "")
       },
       content = function(file) {
         write.csv(filtered_data(), file, fileEncoding = "UTF-8")
