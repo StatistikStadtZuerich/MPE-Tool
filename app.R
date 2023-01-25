@@ -10,6 +10,7 @@ library(httr)
 library(data.table)
 library(zuericssstyle)
 library(icons)
+library(zuericolors)
 
 # Set the Icon path
 ssz_icons <- icon_set("www/icons/")
