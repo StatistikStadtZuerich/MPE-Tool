@@ -10,7 +10,7 @@
 #' @return a div with the chart
 bar_chart <- function(width = "100%", height = "2rem", fill = "#00bfc4", background = NULL) {
   bar <- div(style = list(background = fill, width = width, height = height))
-  chart <- div(style = list(flexGrow = 1, marginLeft = "1.0rem", background = background), bar)
+  chart <- div(style = list(flexGrow = 1, marginLeft = "0rem", background = background), bar)
   div(style = list(display = "flex"), chart)
 }
 
@@ -92,7 +92,7 @@ create_reactable <- function(filtered_data, data_mietobjekt) {
         align = "left",
         cell = function(value) {
           width <- paste0(value / max(data_mietobjekt$WertNum2) * 100, "%")
-          bar_chart(width = width, fill = "#3e46dd")
+          bar_chart(width = width, fill = get_zuericolors("qual6", nth = 1))
         },
         class = "bar",
         headerClass = "barHeader"
