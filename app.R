@@ -156,11 +156,11 @@ if (is.null(data)) {
           # Define subtitle
           p(paste0("Für Detailinformationen zur Verteilung der geschätzten ", 
                      "Mietpreise wählen Sie eine Zeile aus (alle Angaben in ", 
-                     "CHF/Monat)."))
+                     "CHF/Monat).")),
+          
+          # main Table Output
+          reactableOutput("table")
         ),
-        
-        # Example Table Output 
-        reactableOutput("table")
       )
     )
   )
@@ -169,17 +169,9 @@ if (is.null(data)) {
   # Server function
   server <- function(input, output, session) {
     
-    # First button click to activate search, after not necessary anymore
-    global <- reactiveValues(activeButton = FALSE)
-    
-    observeEvent(input$action_start, {
-      req(input$action_start)
-      global$activeButton <- TRUE
-    })
-    
     # Filter data according to inputs
     filtered_data <- reactive({
-      req(global$activeButton == TRUE)
+      req(input$action_start > 0)
       
       if (input$select_raum == "Quartiere") {
         filtered1 <- data
