@@ -30,7 +30,7 @@ create_reactable <- function(filtered_data, data_mietobjekt) {
     mutate(Art = case_when(
       startsWith(key, "qu") ~ "Wert",
       startsWith(key, "mean") ~ "Wert",
-      startsWith(key, "ci") ~ "Konfidenzintervall"
+      startsWith(key, "ci") ~ "95 % Konfidenzintervall"
     )) %>%
     mutate(Lagemass = case_when(
       key == "qu10" ~ "10. Perzentil",
