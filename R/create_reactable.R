@@ -30,7 +30,7 @@ create_reactable <- function(filtered_data, data_mietobjekt) {
     mutate(Art = case_when(
       startsWith(key, "qu") ~ "Wert",
       startsWith(key, "mean") ~ "Wert",
-      startsWith(key, "ci") ~ "95 % Konfidenzintervall"
+      startsWith(key, "ci") ~ "Konfidenzintervall"
     )) %>%
     mutate(Lagemass = case_when(
       key == "qu10" ~ "10. Perzentil",
@@ -98,7 +98,7 @@ create_reactable <- function(filtered_data, data_mietobjekt) {
         headerClass = "barHeader"
       ),
       ci50 = colDef(
-        name = "Konfidenzintervall",
+        name = "95 % Konfidenzintervall",
         align = "left",
         sortable = FALSE
       )
@@ -141,7 +141,7 @@ create_reactable <- function(filtered_data, data_mietobjekt) {
               headerClass = "spacerHeader"
             ),
             Konfidenzintervall = colDef(
-              name = "Konfidenzintervall",
+              name = "95 % Konfidenzintervall",
               minWidth = 100,
               sortable = FALSE
             )
