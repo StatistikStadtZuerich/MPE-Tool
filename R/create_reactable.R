@@ -98,7 +98,7 @@ create_reactable <- function(filtered_data, data_mietobjekt) {
         headerClass = "barHeader"
       ),
       ci50 = colDef(
-        name = "Konfidenzintervall",
+        name = "95 % Konfidenzintervall",
         align = "left",
         sortable = FALSE
       )
@@ -141,7 +141,7 @@ create_reactable <- function(filtered_data, data_mietobjekt) {
               headerClass = "spacerHeader"
             ),
             Konfidenzintervall = colDef(
-              name = "Konfidenzintervall",
+              name = "95 % Konfidenzintervall",
               minWidth = 100,
               sortable = FALSE
             )
