@@ -18,9 +18,10 @@ build-job:       # This job runs in the build stage, which runs first.
   stage: build
   script:
     - Rscript -e "renv::deactivate()" # don't want/need to install the entire renv
-    - install2.r devtools
+    - install2.r remotes
+    - Rscript -e "packageVersion('remotes')"
     #- install2.r rsconnect shiny reactable lubridate jpeg httr data.table Rcpp openxlsx readxl remotes
-    - Rscript -e "devtools::install_git('https://github.com/StatistikStadtZuerich/zuericssstyle')"
-    - Rscript -e "devtools::install_git('https://github.com/StatistikStadtZuerich/zuericolors')"
-    - Rscript -e "devtools::install_git('https://github.com/mitchelloharawild/icons')"
+    #- Rscript -e "devtools::install_git('https://github.com/StatistikStadtZuerich/zuericssstyle')"
+    #- Rscript -e "devtools::install_git('https://github.com/StatistikStadtZuerich/zuericolors')"
+    #- Rscript -e "devtools::install_git('https://github.com/mitchelloharawild/icons')"
     #- Rscript deploy.R
