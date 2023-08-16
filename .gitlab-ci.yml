@@ -16,11 +16,8 @@ stages:          # List of stages for jobs, and their order of execution
 build-job:       # This job runs in the build stage, which runs first.
   stage: build
   script:
-    - echo "Looking at the files in the repo..."
-    - pwd
-    - ls
-    - head README.md
-    - echo "Done Looking."
+    - apt-get update
+    - apt-get install -y docker
  
     # build the docker image and give it the name main
     - docker build -t main . 
