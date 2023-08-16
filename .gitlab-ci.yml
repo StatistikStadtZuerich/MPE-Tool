@@ -17,8 +17,5 @@ stages:          # List of stages for jobs, and their order of execution
 build-job:       # This job runs in the build stage, which runs first.
   stage: build
   script:
-    - install2.r rsconnect shiny reactable lubridate jpeg httr data.table Rcpp openxlsx readxl remotes
-    - Rscript -e "remotes::install_github('StatistikStadtZuerich/zuericssstyle')"
-    - Rscript -e "remotes::install_github('StatistikStadtZuerich/zuericolors')"
-    - Rscript -e "remotes::install_github('mitchelloharawild/icons')"
+    - Rscript -e "renv::restore()"
     - Rscript deploy.R
