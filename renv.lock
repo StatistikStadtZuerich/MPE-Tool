@@ -71,10 +71,10 @@
     },
     "Rcpp": {
       "Package": "Rcpp",
-      "Version": "1.0.9",
+      "Version": "1.0.11",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "e9c08b94391e9f3f97355841229124f2",
+      "Hash": "ae6cbbe1492f4de79c45fce06f967ce8",
       "Requirements": []
     },
     "RcppEigen": {
@@ -1924,11 +1924,11 @@
       "Version": "0.0.0.9008",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
       "RemoteUsername": "StatistikStadtZuerich",
       "RemoteRepo": "zuericssstyle",
       "RemoteRef": "main",
       "RemoteSha": "29845077f8cfb645d23f10910680b4a281adb6b9",
+      "RemoteHost": "api.github.com",
       "Remotes": "github::daqana/dqshiny",
       "Hash": "e8ed377864caba005b9581bddfcfd6de",
       "Requirements": [
