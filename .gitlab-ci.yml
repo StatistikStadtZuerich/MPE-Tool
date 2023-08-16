@@ -1,0 +1,33 @@
+default:
+  image: $CI_REGISTRY/docker-hub-proxy/library/ubuntu
+ 
+variables:
+  CONTAINER_REGISTRY: $CI_REGISTRY
+  CONTAINER_REGISTRY_USERNAME: $CI_REGISTRY_USER
+  CONTAINER_REGISTRY_PASSWORD: $CI_REGISTRY_PASSWORD
+  CONTAINER_REPOSITORY: $SWID
+  CONTAINER_IMAGE_NAME: $CI_PROJECT_NAME # used for container image name
+  COMPONENT_NAME: $CI_PROJECT_NAME # used for component name (alias name) in umbrella chart
+  GIT_STRATEGY: fetch
+ 
+stages:          # List of stages for jobs, and their order of execution
+  - build
+ 
+build-job:       # This job runs in the build stage, which runs first.
+  stage: build
+  script:
+    - echo "Looking at the files in the repo..."
+    - pwd
+    - ls
+    - head README.md
+    - echo "Done Looking."
+ 
+    # build the docker image and give it the name main
+    - docker build -t main . 
+    # run the docker image supply the secrets from the github secrets store.  
+    - docker run 
+          -e SHINY_ACC_NAME=${{ secrets.SHINY_ACC_NAME }} 
+          -e TOKEN=${{secrets.TOKEN}} 
+          -e SECRET=${{secrets.SECRET}} 
+          -e APP_NAME=${{secrets.TEST_NAME}} 
+          main
