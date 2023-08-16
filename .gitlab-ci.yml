@@ -17,6 +17,7 @@ stages:          # List of stages for jobs, and their order of execution
 build-job:       # This job runs in the build stage, which runs first.
   stage: build
   script:
+    - apt-get update
     - Rscript -e "renv::deactivate()" # don't want/need to install the entire renv
     - install2.r rsconnect shiny reactable lubridate jpeg httr data.table Rcpp openxlsx readxl pak
     - Rscript -e "pak::pkg_install('StatistikStadtZuerich/zuericssstyle')"
