@@ -23,4 +23,4 @@ build-job:       # This job runs in the build stage, which runs first.
     - Rscript -e "pak::pkg_install('StatistikStadtZuerich/zuericssstyle')"
     - Rscript -e "pak::pkg_install('StatistikStadtZuerich/zuericolors')"
     - Rscript -e "pak::pkg_install('mitchelloharawild/icons')"
-    - Rscript -e "source(deploy.R)"
+    - Rscript -e "source('deploy.R')"
