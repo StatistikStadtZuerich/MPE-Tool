@@ -1,5 +1,5 @@
 default:
-  image: $CI_REGISTRY/docker-hub-proxy/library/ubuntu
+  image: $CI_REGISTRY/docker-hub-proxy/rocker/tidyverse:4.2.1
  
 variables:
   CONTAINER_REGISTRY: $CI_REGISTRY
@@ -9,6 +9,7 @@ variables:
   CONTAINER_IMAGE_NAME: $CI_PROJECT_NAME # used for container image name
   COMPONENT_NAME: $CI_PROJECT_NAME # used for component name (alias name) in umbrella chart
   GIT_STRATEGY: fetch
+  APP_NAME: $TEST_NAME
  
 stages:          # List of stages for jobs, and their order of execution
   - build
@@ -16,15 +17,8 @@ stages:          # List of stages for jobs, and their order of execution
 build-job:       # This job runs in the build stage, which runs first.
   stage: build
   script:
-    - apt-get update
-    - apt-get install -y docker
- 
-    # build the docker image and give it the name main
-    - docker build -t main . 
-    # run the docker image supply the secrets from the github secrets store.  
-    - docker run 
-          -e SHINY_ACC_NAME=${{ secrets.SHINY_ACC_NAME }} 
-          -e TOKEN=${{secrets.TOKEN}} 
-          -e SECRET=${{secrets.SECRET}} 
-          -e APP_NAME=${{secrets.TEST_NAME}} 
-          main
+    - RUN install2.r rsconnect shiny reactable lubridate jpeg httr data.table Rcpp openxlsx readxl remotes
+    - RUN Rscript -e "remotes::install_github('StatistikStadtZuerich/zuericssstyle')"
+    - RUN Rscript -e "remotes::install_github('StatistikStadtZuerich/zuericolors')"
+    - RUN Rscript -e "remotes::install_github('mitchelloharawild/icons')"
+    - CMD Rscript deploy.R
