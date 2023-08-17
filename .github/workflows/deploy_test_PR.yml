@@ -29,9 +29,7 @@ jobs:
       - name: Build image
         run: |
           ls
-          Rscript -e "install.package('renv')"
           Rscript -e "renv::restore()"
-          #Rscript -e "renv::restore()"
           Rscript -e "rsconnect::setAccountInfo(name = Sys.getenv('SHINY_ACC_NAME'), token = Sys.getenv('TOKEN'), secret = Sys.getenv('SECRET'))"
           Rscript -e "rsconnect::deployApp(forceUpdate = TRUE, appName = Sys.getenv('TEST_NAME'))"
   
