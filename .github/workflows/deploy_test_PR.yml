@@ -12,19 +12,22 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: rocker/tidyverse:4.2.1
+    runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: 'renv'
+      - uses: r-lib/actions/setup-renv@v2
+        with:
+          profile: '"shiny"'
 
       # build the docker image and give it the name main
       - name: Build image
         run: |
-          - apt-get update
-          - apt-get install -y cmake
-          - Rscript -e "renv::restore()"
           - Rscript -e "rsconnect::setAccountInfo(name = Sys.getenv('SHINY_ACC_NAME'), token = Sys.getenv('TOKEN'), secret = Sys.getenv('SECRET'))"
           - Rscript -e "rsconnect::deployApp(forceUpdate = TRUE, appName = Sys.getenv('TEST_NAME'))"
   
