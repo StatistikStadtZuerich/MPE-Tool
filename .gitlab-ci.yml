@@ -9,7 +9,6 @@ variables:
   CONTAINER_IMAGE_NAME: $CI_PROJECT_NAME # used for container image name
   COMPONENT_NAME: $CI_PROJECT_NAME # used for component name (alias name) in umbrella chart
   GIT_STRATEGY: fetch
-  APP_NAME: $TEST_NAME
  
 stages:          # List of stages for jobs, and their order of execution
   - build
@@ -20,10 +19,5 @@ build-job:       # This job runs in the build stage, which runs first.
     - apt-get update
     - apt-get install -y cmake
     - Rscript -e "renv::restore()"
-    #- Rscript -e "renv::deactivate()" # don't want/need to install the entire renv
-    #- install2.r rsconnect shiny reactable lubridate jpeg httr data.table Rcpp openxlsx readxl pak
-    #- Rscript -e "pak::pkg_install('StatistikStadtZuerich/zuericssstyle')"
-    #- Rscript -e "pak::pkg_install('StatistikStadtZuerich/zuericolors')"
-    #- Rscript -e "pak::pkg_install('mitchelloharawild/icons')"
     - Rscript -e "rsconnect::setAccountInfo(name = Sys.getenv('SHINY_ACC_NAME'), token = Sys.getenv('TOKEN'), secret = Sys.getenv('SECRET'))"
-    - Rscript -e "rsconnect::deployApp(forceUpdate = TRUE, appName = Sys.getenv('APP_NAME'))"
+    - Rscript -e "rsconnect::deployApp(forceUpdate = TRUE, appName = Sys.getenv('TEST_NAME'))"
