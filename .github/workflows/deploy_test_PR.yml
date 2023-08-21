@@ -30,7 +30,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install libcurl4-openssl-dev
-          Rscript -e "install.packages('rsconnect', 'shiny', 'reactable', 'lubridate', 'jpeg', 'httr', 'data.table', 'Rcpp', 'openxlsx', 'readxl', 'remotes')"
+          Rscript -e "install.packages(c('rsconnect', 'shiny', 'reactable', 'lubridate', 'jpeg', 'httr', 'data.table', 'Rcpp', 'openxlsx', 'readxl', 'remotes'))"
       - name: deploy
         env:
           SHINY_ACC_NAME: ${{ secrets.SHINY_ACC_NAME }}
