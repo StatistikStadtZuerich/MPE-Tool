@@ -30,6 +30,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install libcurl4-openssl-dev
+          Rscript -e "Sys.getenv()"
           Rscript -e "Sys.getenv('SHINY_ACC_NAME')"
           Rscript -e "${{secrets.SHINY_ACC_NAME}}"
           Rscript -e "install.packages('rsconnect')"
