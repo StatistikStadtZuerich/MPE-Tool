@@ -28,8 +28,8 @@ jobs:
       # build the docker image and give it the name main
       - name: Build image
         run: |
-          apt-get update
-          apt-get install -y libcurl4-openssl-dev
+          sudo apt-get update
+          sudo apt-get install libcurl4-openssl-dev
           Rscript -e "renv::restore()"
           Rscript -e "rsconnect::setAccountInfo(name = Sys.getenv('SHINY_ACC_NAME'), token = Sys.getenv('TOKEN'), secret = Sys.getenv('SECRET'))"
           Rscript -e "rsconnect::deployApp(forceUpdate = TRUE, appName = Sys.getenv('TEST_NAME'))"
