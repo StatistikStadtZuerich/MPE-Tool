@@ -1,5 +1,5 @@
 default:
-  image: $CI_REGISTRY/docker-hub-proxy/ubuntu
+  image: $CI_REGISTRY/docker-hub-proxy/rocker/tidyverse:4.2.1
  
 variables:
   CONTAINER_REGISTRY: $CI_REGISTRY
