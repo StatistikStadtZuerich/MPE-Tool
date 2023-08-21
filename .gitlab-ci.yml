@@ -1,5 +1,5 @@
 default:
-  image: $CI_REGISTRY/docker-hub-proxy/rocker/tidyverse:4.2.1
+  image: $CI_REGISTRY/docker-hub-proxy/ubuntu
  
 variables:
   CONTAINER_REGISTRY: $CI_REGISTRY
@@ -12,12 +12,19 @@ variables:
  
 stages:          # List of stages for jobs, and their order of execution
   - build
+  - deploy
  
 build-job:       # This job runs in the build stage, which runs first.
   stage: build
   script:
-    - apt-get update
-    - apt-get install -y cmake
-    - Rscript -e "renv::restore()"
-    - Rscript -e "rsconnect::setAccountInfo(name = Sys.getenv('SHINY_ACC_NAME'), token = Sys.getenv('TOKEN'), secret = Sys.getenv('SECRET'))"
-    - Rscript -e "rsconnect::deployApp(forceUpdate = TRUE, appName = Sys.getenv('TEST_NAME'))"
+    - docker build -t main . 
+    
+deploy-job:       # This job runs in the build stage, which runs first.
+  stage: deploy
+  script:
+    - docker run 
+          -e SHINY_ACC_NAME=$SHINY_ACC_NAME
+          -e TOKEN=$TOKEN 
+          -e SECRET=$SECRET 
+          -e APP_NAME=$TEST_NAME
+          main
