@@ -9,6 +9,7 @@ variables:
   CONTAINER_IMAGE_NAME: $CI_PROJECT_NAME # used for container image name
   COMPONENT_NAME: $CI_PROJECT_NAME # used for component name (alias name) in umbrella chart
   GIT_STRATEGY: fetch
+  APP_NAME: $TEST_NAME
  
 stages:          # List of stages for jobs, and their order of execution
   - build
@@ -17,16 +18,9 @@ stages:          # List of stages for jobs, and their order of execution
 build-job:       # This job runs in the build stage, which runs first.
   stage: build
   script:
-    - apt-get update
-    - apt-get install -y docker
-    - docker build -t main . 
+    - Rscript -e "source('install_deps_for_deployment.R')"
     
 deploy-job:       # This job runs in the build stage, which runs first.
   stage: deploy
   script:
-    - docker run 
-          -e SHINY_ACC_NAME=$SHINY_ACC_NAME
-          -e TOKEN=$TOKEN 
-          -e SECRET=$SECRET 
-          -e APP_NAME=$TEST_NAME
-          main
+    - Rscript -e "source('deploy.R')"
