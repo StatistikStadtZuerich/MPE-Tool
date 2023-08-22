@@ -2,8 +2,6 @@
 rsconnect::setAccountInfo(name = Sys.getenv("SHINY_ACC_NAME"),
                token = Sys.getenv("TOKEN"),
                secret = Sys.getenv("SECRET"))
-# use the old way of finding dependencies
-options(rsconnect.packrat = TRUE)
 
 # Deploy
 rsconnect::deployApp(forceUpdate = TRUE,

@@ -3,6 +3,7 @@ RUN install2.r shiny reactable lubridate jpeg httr data.table Rcpp openxlsx read
 RUN Rscript -e "remotes::install_github('StatistikStadtZuerich/zuericssstyle')"
 RUN Rscript -e "remotes::install_github('StatistikStadtZuerich/zuericolors')"
 RUN Rscript -e "remotes::install_github('mitchelloharawild/icons')"
+RUN Rscript -e "remotes::install_github('rstudio/renv')" # install this in latest version too
 RUN Rscript -e "remotes::install_github('rstudio/rsconnect')" # need latest version, posit dropped support for previous
 RUN Rscript -e "packageVersion('rsconnect')"
 WORKDIR /home/mpe-test
