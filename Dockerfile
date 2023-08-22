@@ -13,6 +13,6 @@ COPY www/icons/download.svg www/icons/download.svg
 COPY www/icons/external-link.svg www/icons/external-link.svg
 COPY deploy.R deploy.R
 COPY install_deps_for_deployment.R install_deps_for_deployment.R
-CMD Rscript -e "source(install_deps_for_deployment.R)"
+CMD Rscript /install_deps_for_deployment.R
 CMD Rscript -e "installed.packages()"
 #CMD Rscript deploy.R
