@@ -1,6 +1,8 @@
-renv*
-gitlab*
-.github*
+renv/*
+renv.lock
+.gitlab*
+.github/*
+.RProfile
 deploy.R
 install_deps_for_deployment.R
 Dockerfile
