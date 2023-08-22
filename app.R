@@ -1,6 +1,8 @@
 # Load Library
 library(shiny)
-library(tidyverse)
+library(dplyr)
+library(tidyr)
+library(forcats)
 library(reactable)
 library(lubridate)
 library(jpeg)
