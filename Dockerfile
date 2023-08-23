@@ -1,11 +1,11 @@
-FROM rocker/tidyverse:4.2.1
-RUN install2.r shiny reactable lubridate jpeg httr data.table Rcpp openxlsx readxl remotes
+FROM rocker/tidyverse:latest
+RUN install2.r rsconnect shiny reactable lubridate jpeg httr data.table Rcpp openxlsx readxl remotes
 RUN Rscript -e "remotes::install_github('StatistikStadtZuerich/zuericssstyle')"
 RUN Rscript -e "remotes::install_github('StatistikStadtZuerich/zuericolors')"
 RUN Rscript -e "remotes::install_github('mitchelloharawild/icons')"
-RUN Rscript -e "remotes::install_github('rstudio/renv')" # install this in latest version too
-RUN Rscript -e "remotes::install_github('rstudio/rsconnect')" # need latest version, posit dropped support for previous
-RUN Rscript -e "packageVersion('rsconnect')"
+#RUN Rscript -e "remotes::install_github('rstudio/renv')" # install this in latest version too
+#RUN Rscript -e "remotes::install_github('rstudio/rsconnect')" # need latest version, posit dropped support for previous
+#RUN Rscript -e "packageVersion('rsconnect')"
 WORKDIR /home/mpe-test
 COPY app.R app.R
 COPY R/ssz_download_excel.R R/ssz_download_excel.R
