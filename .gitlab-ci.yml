@@ -1,5 +1,5 @@
 default:
-  image: $CI_REGISTRY/ssz-da/shiny_container:0.0.0.9000
+  image: $CI_REGISTRY/ssz-da/shiny_container:0.0.0.9001
  
 variables:
   CONTAINER_REGISTRY: $CI_REGISTRY
@@ -19,5 +19,4 @@ deploy-job:
   script:
     - Rscript -e "renv::deactivate()"
     - Rscript -e "packageVersion('rsconnect')"
-    - Rscript -e "installed.packages()"
     - Rscript -e "source('deploy.R')"
