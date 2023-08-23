@@ -17,4 +17,5 @@ stages:          # List of stages for jobs, and their order of execution
 deploy-job:
   stage: deploy
   script:
+    - Rscript -e "renv::deactivate()"
     - Rscript -e "source('deploy.R')"
