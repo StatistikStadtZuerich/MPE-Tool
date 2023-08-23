@@ -1,5 +1,5 @@
 default:
-  image: $CI_REGISTRY/docker-hub-proxy/rocker/tidyverse:4.2.1
+  image: $CI_REGISTRY/ssz-da/shiny_container:0.0.0.9000
  
 variables:
   CONTAINER_REGISTRY: $CI_REGISTRY
@@ -12,10 +12,9 @@ variables:
   APP_NAME: $TEST_NAME
  
 stages:          # List of stages for jobs, and their order of execution
-  - build
+  - deploy
  
-build-job:       # This job runs in the build stage, which runs first.
-  stage: build
+deploy-job:
+  stage: deploy
   script:
-    - Rscript -e "source('install_deps_for_deployment.R')"
     - Rscript -e "source('deploy.R')"
