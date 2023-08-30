@@ -1,5 +1,5 @@
 default:
-  image: $CI_REGISTRY/ssz-da/shiny_container:0.0.0.9001
+  image: $CI_REGISTRY/ssz-da/shiny_container:0.0.0.9002
  
 variables:
   CONTAINER_REGISTRY: $CI_REGISTRY
@@ -9,13 +9,30 @@ variables:
   CONTAINER_IMAGE_NAME: $CI_PROJECT_NAME # used for container image name
   COMPONENT_NAME: $CI_PROJECT_NAME # used for component name (alias name) in umbrella chart
   GIT_STRATEGY: fetch
-  APP_NAME: $TEST_NAME
  
 stages:          # List of stages for jobs, and their order of execution
-  - deploy
+  - deploy_test
+  - deploy_prod
  
-deploy-job:
-  stage: deploy
+deploy-job-test:
+  # ausgeführt wenn push in merge request
+  stage: deploy_test
+  variables:
+    APP_NAME: $TEST_NAME
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+  script:
+    - Rscript -e "renv::deactivate()"
+    - Rscript -e "packageVersion('rsconnect')"
+    - Rscript -e "source('deploy.R')"
+
+deploy-job-prod:
+  # ausgeführt wenn Push auf Main branch
+  stage: deploy_prod
+  variables:
+    APP_NAME: $PROD_NAME
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   script:
     - Rscript -e "renv::deactivate()"
     - Rscript -e "packageVersion('rsconnect')"
