@@ -162,7 +162,11 @@ if (is.null(data)) {
         ),
         
         # Example Table Output 
-        reactableOutput("table")
+        shinycssloaders::withSpinner(
+          reactableOutput("table"),
+          type = 7,
+          color = "#0F05A0"
+        )
       )
     )
   )
