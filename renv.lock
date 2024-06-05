@@ -1346,14 +1346,14 @@
     },
     "zuericssstyle": {
       "Package": "zuericssstyle",
-      "Version": "0.0.1.0002",
+      "Version": "0.0.1.0003",
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
       "RemoteUsername": "StatistikStadtZuerich",
       "RemoteRepo": "zuericssstyle",
       "RemoteRef": "main",
-      "RemoteSha": "02f3b267992d374eb6f6e71a01dc11fefc0e0d62",
+      "RemoteSha": "e83492a3f7cf701b1586ad12ab6e077244bbc0e1",
       "Remotes": "github::daqana/dqshiny",
       "Requirements": [
         "dqshiny",
@@ -1361,7 +1361,7 @@
         "shiny",
         "shinyWidgets"
       ],
-      "Hash": "6800cba81ec0f2d6f2ffa10bbe9049bb"
+      "Hash": "a9cd13a1fbd6037ccd95b8ce6135f35e"
     }
   }
 }
