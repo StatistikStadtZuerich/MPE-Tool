@@ -199,7 +199,8 @@ if (is.null(data)) {
         filter(RaumeinheitLang == input$select_raum) %>% 
         filter(ZimmerLang == input$radio_anz_zi) %>% 
         filter(EinheitLang == input$radio_whg_qm) %>% 
-        filter(PreisartLang == input$radio_net_gross)
+        filter(PreisartLang == input$radio_net_gross) %>%
+        arrange(GliederungSort)
     })
     
     output$table <- renderReactable({
@@ -208,7 +209,7 @@ if (is.null(data)) {
       data_mietobjekt <- filtered_data() %>% 
         mutate(WertNum2 = as.numeric(qu50)) %>%
         mutate(WertNum = as.numeric(qu50)) %>% 
-        select(GliederungLang, WertNum, WertNum2, ci50) 
+        select(GliederungLang, WertNum, WertNum2, ci50)
 
       table_output <- create_reactable(filtered_data(), data_mietobjekt)
     })
