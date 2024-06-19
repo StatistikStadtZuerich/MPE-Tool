@@ -74,7 +74,8 @@ if (is.null(data)) {
           # radio button Wohnungstyp (ALLE/gemeinnuetzig/nicht gemeinnuetzig)
           sszRadioButtons(inputId = "radio_gemeinnue_alle",
                        label = "Typ der Wohnung",
-                       choices = unique(data$GemeinnuetzigLang)
+                       choices = sort(unique(data$GemeinnuetzigLang)),
+                       selected = unique(data$GemeinnuetzigLang)[[2]]
           )
         ),
         
@@ -92,21 +93,21 @@ if (is.null(data)) {
         # radio button Anzahl Zimmer
         sszRadioButtons(inputId = "radio_anz_zi",
                      label = "Anzahl Zimmer",
-                     choices = unique(data$ZimmerLang),
-                     selected = unique(data$ZimmerLang)[[2]] # default value
+                     choices = sort(unique(data$ZimmerLang)),
+                     selected = unique(data$ZimmerLang)[[3]] # default value
         ),
         
         # Preis pro Wohnung oder pro Quadratmeter
         sszRadioButtons(inputId = "radio_whg_qm",
                      label = "Ebene Mietpreis",
-                     choices = unique(data$EinheitLang),
-                     selected = unique(data$EinheitLang)[[1]] # default value
+                     choices = sort(unique(data$EinheitLang)),
+                     selected = unique(data$EinheitLang)[[2]] # default value
         ),
         
         # Netto oder Bruttopreise
         sszRadioButtons(inputId = "radio_net_gross",
                      label = "Art der Miete",
-                     choices = unique(data$PreisartLang),
+                     choices = sort(unique(data$PreisartLang)),
                      selected = unique(data$PreisartLang)[[1]] # default value
         ),
         
@@ -198,7 +199,8 @@ if (is.null(data)) {
         filter(RaumeinheitLang == input$select_raum) %>% 
         filter(ZimmerLang == input$radio_anz_zi) %>% 
         filter(EinheitLang == input$radio_whg_qm) %>% 
-        filter(PreisartLang == input$radio_net_gross)
+        filter(PreisartLang == input$radio_net_gross) %>%
+        arrange(GliederungSort)
     })
     
     output$table <- renderReactable({
@@ -207,7 +209,7 @@ if (is.null(data)) {
       data_mietobjekt <- filtered_data() %>% 
         mutate(WertNum2 = as.numeric(qu50)) %>%
         mutate(WertNum = as.numeric(qu50)) %>% 
-        select(GliederungLang, WertNum, WertNum2, ci50) 
+        select(GliederungLang, WertNum, WertNum2, ci50)
 
       table_output <- create_reactable(filtered_data(), data_mietobjekt)
     })
